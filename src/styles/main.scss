@@ -38,10 +38,53 @@ a {
   width: 100%;
   max-width: $container-width;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 40px;
+
+  @include tablet {
+    padding: 0 24px;
+  }
 
   @include mobile-min {
     padding: 0 16px;
+  }
+}
+
+// ---------- Кнопки (button-primary / button-secondary) ----------
+.btn {
+  @include link-button-text;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--bg-page);
+
+  &:hover {
+    background-color: var(--color-text);
+    color: var(--color-text-on-accent);
+  }
+}
+
+.btn--secondary {
+  border-color: var(--color-border);
+  color: var(--color-text);
+
+  &:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-on-accent);
   }
 }
 
@@ -49,12 +92,14 @@ a {
 .logo {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 2px;
+  height: $header-height;
   line-height: 1;
 
   &__name {
     font-family: $font-logo;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     color: var(--color-text);
   }
@@ -70,7 +115,6 @@ a {
   position: sticky;
   top: 0;
   z-index: 100;
-  height: $header-height;
   background-color: var(--color-header-bg);
   border-bottom: 1px solid var(--color-border);
 
@@ -78,17 +122,20 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    height: $header-height;
+    gap: 24px;
   }
 }
 
 .nav {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: 40px;
   list-style: none;
 
   &__link {
     @include link-button-text;
+    white-space: nowrap;
 
     &--active {
       color: var(--color-accent);
@@ -102,35 +149,48 @@ a {
   gap: 16px;
 }
 
+// Переключатель темы: пилюля с двумя кружками (солнце/луна)
 .theme-toggle {
-  border: 1px solid var(--color-border);
-  background: none;
-  border-radius: 999px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  color: var(--color-text);
+  gap: 8px;
+  width: 88px;
+  height: 44px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
 
-  svg {
-    width: 20px;
-    height: 20px;
+  &__circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    transition: background-color 0.2s ease;
   }
 
-  .icon-moon {
-    display: none;
+  &__circle--sun {
+    background-color: var(--color-accent);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
 [data-theme='dark'] .theme-toggle {
-  .icon-sun {
-    display: none;
+  .theme-toggle__circle--sun {
+    background-color: transparent;
   }
 
-  .icon-moon {
-    display: block;
+  .theme-toggle__circle--moon {
+    background-color: var(--color-accent);
   }
 }
 
@@ -142,6 +202,7 @@ a {
   background: none;
   cursor: pointer;
   color: var(--color-text);
+  flex-shrink: 0;
 
   svg {
     width: 24px;
@@ -268,12 +329,17 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .header__menu-btn span {
+    display: none;
+  }
+
   .nav {
     position: fixed;
     inset: $header-height 0 0 0;
     background-color: var(--color-header-bg);
     flex-direction: column;
-    padding: 24px 20px;
+    align-items: flex-start;
+    padding: 24px;
     transform: translateX(100%);
     transition: transform 0.3s ease;
 
@@ -294,5 +360,19 @@ a {
 @include mobile {
   .catalog__grid {
     grid-template-columns: 1fr;
+  }
+
+  .header__actions {
+    gap: 8px;
+  }
+
+  .theme-toggle {
+    width: 72px;
+    height: 36px;
+
+    &__circle {
+      width: 28px;
+      height: 28px;
+    }
   }
 }
