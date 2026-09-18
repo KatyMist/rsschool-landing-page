@@ -128,7 +128,7 @@ a {
     width: 64.78px;
     z-index: 1;
     @include caption;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     white-space: nowrap;
     text-align: center;
   }
