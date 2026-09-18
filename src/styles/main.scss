@@ -1,4 +1,6 @@
 @use 'variables' as *;
+@use 'mixins' as *;
+@use 'typography' as *;
 @use 'themes';
 
 * {
@@ -12,7 +14,7 @@ html {
 }
 
 body {
-  font-family: $font-main;
+  @include body-medium;
   background-color: var(--color-bg);
   color: var(--color-text);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -37,6 +39,30 @@ a {
   max-width: $container-width;
   margin: 0 auto;
   padding: 0 20px;
+
+  @include mobile-min {
+    padding: 0 16px;
+  }
+}
+
+// ---------- Логотип (шапка и подвал) ----------
+.logo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1;
+
+  &__name {
+    font-family: $font-logo;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  &__tagline {
+    @include caption;
+    color: var(--color-text-muted);
+  }
 }
 
 // ---------- Header ----------
@@ -54,19 +80,15 @@ a {
     justify-content: space-between;
     height: 100%;
   }
-
-  &__logo {
-    font-weight: 700;
-    font-size: 20px;
-  }
 }
 
 .nav {
   display: flex;
   gap: 32px;
+  list-style: none;
 
   &__link {
-    font-weight: 500;
+    @include link-button-text;
 
     &--active {
       color: var(--color-accent);
@@ -91,6 +113,25 @@ a {
   align-items: center;
   justify-content: center;
   color: var(--color-text);
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-moon {
+    display: none;
+  }
+}
+
+[data-theme='dark'] .theme-toggle {
+  .icon-sun {
+    display: none;
+  }
+
+  .icon-moon {
+    display: block;
+  }
 }
 
 .burger {
@@ -100,6 +141,26 @@ a {
   border: none;
   background: none;
   cursor: pointer;
+  color: var(--color-text);
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  &[aria-expanded='true'] {
+    .icon-menu {
+      display: none;
+    }
+
+    .icon-close {
+      display: block;
+    }
+  }
 }
 
 // ---------- Footer ----------
@@ -107,6 +168,11 @@ a {
   background-color: var(--color-bg-secondary);
   border-top: 1px solid var(--color-border);
   padding: 48px 0 24px;
+
+  .logo__name,
+  .logo__tagline {
+    color: var(--color-text-on-accent);
+  }
 
   &__inner {
     display: flex;
@@ -117,7 +183,7 @@ a {
 
   &__copyright {
     margin-top: 32px;
-    color: var(--color-text-muted);
+    color: var(--color-text-on-accent);
     font-size: 14px;
   }
 }
@@ -127,7 +193,7 @@ a {
   padding: 80px 0;
 
   &__title {
-    font-size: 36px;
+    @include heading-2;
     margin-bottom: 24px;
   }
 }
@@ -142,6 +208,7 @@ a {
   }
 
   &__category {
+    @include link-button-text;
     padding: 10px 20px;
     border-radius: 999px;
     border: 1px solid var(--color-border);
@@ -151,7 +218,7 @@ a {
 
     &--active {
       background-color: var(--color-accent);
-      color: #fff;
+      color: var(--color-text-on-accent);
       border-color: var(--color-accent);
     }
   }
@@ -168,6 +235,11 @@ a {
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(0.98);
+  }
 
   &__image {
     aspect-ratio: 4 / 3;
@@ -180,24 +252,22 @@ a {
   }
 
   &__title {
-    font-weight: 600;
+    @include heading-3;
     margin-bottom: 8px;
   }
 
   &__price {
+    @include link-button-text;
     color: var(--color-accent);
-    font-weight: 700;
   }
 }
 
 // ---------- Адаптив ----------
-@media (max-width: $bp-tablet) {
+@include tablet {
   .catalog__grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: $bp-mobile) {
   .nav {
     position: fixed;
     inset: $header-height 0 0 0;
@@ -210,23 +280,19 @@ a {
     &--open {
       transform: translateX(0);
     }
+
+    &__link {
+      @include burger-link-text;
+    }
   }
 
   .burger {
     display: block;
   }
-
-  .catalog__grid {
-    grid-template-columns: 1fr;
-  }
-
-  .section__title {
-    font-size: 28px;
-  }
 }
 
-@media (max-width: $bp-mobile-small) {
-  .container {
-    padding: 0 16px;
+@include mobile {
+  .catalog__grid {
+    grid-template-columns: 1fr;
   }
 }

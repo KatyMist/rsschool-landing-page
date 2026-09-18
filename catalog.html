@@ -3,12 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffee House — Каталог</title>
+    <meta name="description" content="Каталог кофейни Resource Coffee House: кофе, чай и десерты." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>Resource Coffee House — Каталог</title>
   </head>
   <body>
     <header class="header">
       <div class="container header__inner">
-        <a href="index.html" class="header__logo">Coffee House</a>
+        <a href="index.html" class="logo">
+          <span class="logo__name">Resource</span>
+          <span class="logo__tagline">Coffee House</span>
+        </a>
 
         <nav class="nav" data-nav>
           <a href="index.html" class="nav__link">Главная</a>
@@ -22,7 +29,13 @@
             aria-pressed="false"
             aria-label="Переключить тему"
           >
-            🌓
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"></path>
+            </svg>
           </button>
           <button
             class="burger"
@@ -30,7 +43,12 @@
             aria-expanded="false"
             aria-label="Открыть меню"
           >
-            ☰
+            <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M3 6h18M3 12h18M3 18h18"></path>
+            </svg>
+            <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <path d="M5 5l14 14M19 5L5 19"></path>
+            </svg>
           </button>
         </div>
       </div>
@@ -63,13 +81,16 @@
 
     <footer class="footer">
       <div class="container footer__inner">
-        <div class="footer__logo">Coffee House</div>
+        <div class="footer__logo logo">
+          <span class="logo__name">Resource</span>
+          <span class="logo__tagline">Coffee House</span>
+        </div>
         <div class="footer__contacts">
           <p>ул. Примерная, 1</p>
           <p>+7 900 000-00-00</p>
         </div>
       </div>
-      <p class="container footer__copyright">© 2026 Coffee House. Учебный проект RS School.</p>
+      <p class="container footer__copyright">© 2026 Resource Coffee House. Учебный проект RS School.</p>
     </footer>
 
     <script type="module" src="/src/scripts/main.js"></script>

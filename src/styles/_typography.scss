@@ -1,0 +1,63 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Шкала типографики по дизайн-системе макета (Desktop → Mobile)
+@mixin heading-1 {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 72px;
+  line-height: 105%;
+
+  @include mobile {
+    font-size: 42px;
+    line-height: 115%;
+  }
+}
+
+@mixin heading-2 {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 60px;
+  line-height: 125%;
+
+  @include mobile {
+    font-size: 32px;
+  }
+}
+
+@mixin heading-3 {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 125%;
+}
+
+@mixin body-medium {
+  font-family: $font-main;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+@mixin caption {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 140%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@mixin link-button-text {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+@mixin burger-link-text {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 125%;
+}

@@ -1,9 +1,13 @@
-// Брейкпоинты (desktop-first, по макету Coffee House)
-$bp-tablet: 1024px;
-$bp-mobile: 768px;
-$bp-mobile-small: 380px;
+// ---------- Брейкпоинты (desktop-first) ----------
+// Ноутбук визуально не отличается от десктопа — единой раскладки достаточно.
+// Референсные ширины макета Figma указаны в комментариях.
+$bp-tablet: 1023px;    // ⩽ — планшетная раскладка (макет: Tablet 768px)
+$bp-mobile: 480px;     // ⩽ — мобильная раскладка (макет: Mobile 380px)
+$bp-mobile-min: 380px; // минимальная поддерживаемая ширина экрана
 
-$font-main: 'Poppins', sans-serif;
+// ---------- Шрифты ----------
+$font-main: 'Inter', sans-serif;
+$font-logo: 'Caveat', cursive;
 
 $container-width: 1240px;
 $header-height: 88px;
