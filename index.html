@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee House</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html" class="header__logo">Coffee House</a>
+
+        <nav class="nav" data-nav>
+          <a href="index.html" class="nav__link nav__link--active">Главная</a>
+          <a href="catalog.html" class="nav__link">Каталог</a>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            class="theme-toggle"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Переключить тему"
+          >
+            🌓
+          </button>
+          <button
+            class="burger"
+            data-burger-toggle
+            aria-expanded="false"
+            aria-label="Открыть меню"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Секция 1: hero -->
+      <section class="section hero">
+        <div class="container">
+          <h1 class="section__title">Coffee House</h1>
+          <p>Кофе, который любят возвращаться.</p>
+        </div>
+      </section>
+
+      <!-- Секция 2: о нас -->
+      <section class="section about">
+        <div class="container">
+          <h2 class="section__title">О нас</h2>
+          <p>Текст об истории и атмосфере кофейни.</p>
+        </div>
+      </section>
+
+      <!-- Секция 3: превью каталога -->
+      <section class="section menu-preview">
+        <div class="container">
+          <h2 class="section__title">Меню</h2>
+          <p>Тизер каталога напитков и десертов, ссылка на страницу «Каталог».</p>
+        </div>
+      </section>
+
+      <!-- Секция 4: контакты / отзывы -->
+      <section class="section contacts">
+        <div class="container">
+          <h2 class="section__title">Контакты</h2>
+          <p>Адрес, время работы, форма обратной связи.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__logo">Coffee House</div>
+        <div class="footer__contacts">
+          <p>ул. Примерная, 1</p>
+          <p>+7 900 000-00-00</p>
+        </div>
+      </div>
+      <p class="container footer__copyright">© 2026 Coffee House. Учебный проект RS School.</p>
+    </footer>
+
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>

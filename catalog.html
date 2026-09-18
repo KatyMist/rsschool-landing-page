@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coffee House — Каталог</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header__inner">
+        <a href="index.html" class="header__logo">Coffee House</a>
+
+        <nav class="nav" data-nav>
+          <a href="index.html" class="nav__link">Главная</a>
+          <a href="catalog.html" class="nav__link nav__link--active">Каталог</a>
+        </nav>
+
+        <div class="header__actions">
+          <button
+            class="theme-toggle"
+            data-theme-toggle
+            aria-pressed="false"
+            aria-label="Переключить тему"
+          >
+            🌓
+          </button>
+          <button
+            class="burger"
+            data-burger-toggle
+            aria-expanded="false"
+            aria-label="Открыть меню"
+          >
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="section catalog">
+        <div class="container">
+          <h1 class="section__title">Каталог</h1>
+
+          <div class="catalog__categories">
+            <button class="catalog__category catalog__category--active">Кофе</button>
+            <button class="catalog__category">Чай</button>
+            <button class="catalog__category">Десерты</button>
+          </div>
+
+          <div class="catalog__grid">
+            <article class="card">
+              <img class="card__image" src="" alt="Латте" />
+              <div class="card__body">
+                <h3 class="card__title">Латте</h3>
+                <p class="card__price">250 ₽</p>
+              </div>
+            </article>
+            <!-- остальные карточки добавляются динамически или дублируются -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div class="footer__logo">Coffee House</div>
+        <div class="footer__contacts">
+          <p>ул. Примерная, 1</p>
+          <p>+7 900 000-00-00</p>
+        </div>
+      </div>
+      <p class="container footer__copyright">© 2026 Coffee House. Учебный проект RS School.</p>
+    </footer>
+
+    <script type="module" src="/src/scripts/main.js"></script>
+  </body>
+</html>
