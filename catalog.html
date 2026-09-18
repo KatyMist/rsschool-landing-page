@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Каталог кофейни Resource Coffee House: кофе, чай и десерты." />
+    <meta name="description" content="Resource Coffee House catalog: coffee, tea and desserts." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <title>Resource Coffee House — Каталог</title>
+    <title>Resource Coffee House — Catalog</title>
   </head>
   <body>
     <header class="header">
@@ -18,10 +18,10 @@
         </a>
 
         <nav class="nav" data-nav>
-          <a href="index.html#favorites" class="nav__link">Любимый кофе</a>
-          <a href="index.html#about" class="nav__link">О нас</a>
-          <a href="index.html#app" class="nav__link">Приложение</a>
-          <a href="index.html#contacts" class="nav__link">Контакты</a>
+          <a href="index.html#favorites" class="nav__link">Favorite coffee</a>
+          <a href="index.html#about" class="nav__link">About</a>
+          <a href="index.html#app" class="nav__link">Mobile app</a>
+          <a href="index.html#contacts" class="nav__link">Contact us</a>
         </nav>
 
         <div class="header__actions">
@@ -29,7 +29,7 @@
             class="theme-toggle"
             data-theme-toggle
             aria-pressed="false"
-            aria-label="Переключить тему"
+            aria-label="Toggle theme"
           >
             <span class="theme-toggle__circle theme-toggle__circle--sun">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -45,7 +45,7 @@
           </button>
 
           <a href="catalog.html" class="btn btn--primary header__menu-btn">
-            <span>Меню</span>
+            <span>Menu</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"></path>
               <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"></path>
@@ -57,7 +57,7 @@
             class="burger"
             data-burger-toggle
             aria-expanded="false"
-            aria-label="Открыть меню"
+            aria-label="Open menu"
           >
             <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
               <path d="M3 6h18M3 12h18M3 18h18"></path>
@@ -73,23 +73,23 @@
     <main>
       <section class="section catalog">
         <div class="container">
-          <h1 class="section__title">Каталог</h1>
+          <h1 class="section__title">Catalog</h1>
 
           <div class="catalog__categories">
-            <button class="catalog__category catalog__category--active">Кофе</button>
-            <button class="catalog__category">Чай</button>
-            <button class="catalog__category">Десерты</button>
+            <button class="catalog__category catalog__category--active">Coffee</button>
+            <button class="catalog__category">Tea</button>
+            <button class="catalog__category">Desserts</button>
           </div>
 
           <div class="catalog__grid">
             <article class="card">
-              <img class="card__image" src="" alt="Латте" />
+              <img class="card__image" src="" alt="Latte" />
               <div class="card__body">
-                <h3 class="card__title">Латте</h3>
-                <p class="card__price">250 ₽</p>
+                <h3 class="card__title">Latte</h3>
+                <p class="card__price">$5.50</p>
               </div>
             </article>
-            <!-- остальные карточки добавляются динамически или дублируются -->
+            <!-- more cards are added dynamically / duplicated -->
           </div>
         </div>
       </section>
@@ -102,11 +102,11 @@
           <img class="logo__img logo__img--dark" src="/src/assets/icons/logo-2.png" alt="Resource Coffee House" />
         </div>
         <div class="footer__contacts">
-          <p>ул. Примерная, 1</p>
-          <p>+7 900 000-00-00</p>
+          <p>123 Example St., LA</p>
+          <p>+1 900 000-00-00</p>
         </div>
       </div>
-      <p class="container footer__copyright">© 2026 Resource Coffee House. Учебный проект RS School.</p>
+      <p class="container footer__copyright">© 2026 Resource Coffee House. RS School student project.</p>
     </footer>
 
     <script type="module" src="/src/scripts/main.js"></script>

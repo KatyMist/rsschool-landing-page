@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Resource Coffee House — уютная кофейня в центре города. Свежий кофе, авторские десерты и атмосфера, в которую хочется возвращаться." />
+    <meta name="description" content="Resource Coffee House — a cozy coffee shop in the heart of the city. Fresh coffee, signature desserts and an atmosphere you'll want to come back to." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -18,10 +18,10 @@
         </a>
 
         <nav class="nav" data-nav>
-          <a href="index.html#favorites" class="nav__link">Любимый кофе</a>
-          <a href="index.html#about" class="nav__link">О нас</a>
-          <a href="index.html#app" class="nav__link">Приложение</a>
-          <a href="index.html#contacts" class="nav__link">Контакты</a>
+          <a href="index.html#favorites" class="nav__link">Favorite coffee</a>
+          <a href="index.html#about" class="nav__link">About</a>
+          <a href="index.html#app" class="nav__link">Mobile app</a>
+          <a href="index.html#contacts" class="nav__link">Contact us</a>
         </nav>
 
         <div class="header__actions">
@@ -29,7 +29,7 @@
             class="theme-toggle"
             data-theme-toggle
             aria-pressed="false"
-            aria-label="Переключить тему"
+            aria-label="Toggle theme"
           >
             <span class="theme-toggle__circle theme-toggle__circle--sun">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -45,7 +45,7 @@
           </button>
 
           <a href="catalog.html" class="btn btn--primary header__menu-btn">
-            <span>Меню</span>
+            <span>Menu</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M4 8h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Z"></path>
               <path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17"></path>
@@ -57,7 +57,7 @@
             class="burger"
             data-burger-toggle
             aria-expanded="false"
-            aria-label="Открыть меню"
+            aria-label="Open menu"
           >
             <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
               <path d="M3 6h18M3 12h18M3 18h18"></path>
@@ -71,35 +71,43 @@
     </header>
 
     <main>
-      <!-- Секция 1: hero -->
+      <!-- Section 1: hero -->
       <section class="section hero">
         <div class="container">
           <h1 class="section__title">Resource Coffee House</h1>
-          <p>Кофе, к которому хочется возвращаться.</p>
+          <p>The coffee you'll keep coming back for.</p>
         </div>
       </section>
 
-      <!-- Секция 2: о нас -->
-      <section class="section about">
+      <!-- Section 2: favorite coffee / menu teaser -->
+      <section id="favorites" class="section favorites">
         <div class="container">
-          <h2 class="section__title">О нас</h2>
-          <p>Текст об истории и атмосфере кофейни.</p>
+          <h2 class="section__title">Favorite coffee</h2>
+          <p>A slider with our best-selling drinks and a link to the full catalog page.</p>
         </div>
       </section>
 
-      <!-- Секция 3: превью каталога -->
-      <section class="section menu-preview">
+      <!-- Section 3: about -->
+      <section id="about" class="section about">
         <div class="container">
-          <h2 class="section__title">Меню</h2>
-          <p>Тизер каталога напитков и десертов, ссылка на страницу «Каталог».</p>
+          <h2 class="section__title">About</h2>
+          <p>The story and atmosphere of the coffee house.</p>
         </div>
       </section>
 
-      <!-- Секция 4: контакты / отзывы -->
-      <section class="section contacts">
+      <!-- Section 4: mobile app -->
+      <section id="app" class="section app">
         <div class="container">
-          <h2 class="section__title">Контакты</h2>
-          <p>Адрес, время работы, форма обратной связи.</p>
+          <h2 class="section__title">Mobile app</h2>
+          <p>Order ahead and collect rewards — app promo with App Store / Google Play buttons.</p>
+        </div>
+      </section>
+
+      <!-- Section 5: contacts -->
+      <section id="contacts" class="section contacts">
+        <div class="container">
+          <h2 class="section__title">Contact us</h2>
+          <p>Address, opening hours and a contact link.</p>
         </div>
       </section>
     </main>
@@ -111,11 +119,11 @@
           <img class="logo__img logo__img--dark" src="/src/assets/icons/logo-2.png" alt="Resource Coffee House" />
         </div>
         <div class="footer__contacts">
-          <p>ул. Примерная, 1</p>
-          <p>+7 900 000-00-00</p>
+          <p>123 Example St., LA</p>
+          <p>+1 900 000-00-00</p>
         </div>
       </div>
-      <p class="container footer__copyright">© 2026 Resource Coffee House. Учебный проект RS School.</p>
+      <p class="container footer__copyright">© 2026 Resource Coffee House. RS School student project.</p>
     </footer>
 
     <script type="module" src="/src/scripts/main.js"></script>
