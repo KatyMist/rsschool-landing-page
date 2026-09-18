@@ -180,12 +180,19 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text);
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
+  // По умолчанию (светлая тема) активен «солнце»: заливка accent + светлая иконка.
+  // «Луна» неактивна: без заливки + тёмная иконка.
   &__circle--sun {
     background-color: var(--color-accent);
+    color: var(--bg-page);
+  }
+
+  &__circle--moon {
+    background-color: transparent;
+    color: var(--color-text);
   }
 
   svg {
@@ -197,10 +204,12 @@ a {
 [data-theme='dark'] .theme-toggle {
   .theme-toggle__circle--sun {
     background-color: transparent;
+    color: var(--color-text);
   }
 
   .theme-toggle__circle--moon {
     background-color: var(--color-accent);
+    color: var(--bg-page);
   }
 }
 
