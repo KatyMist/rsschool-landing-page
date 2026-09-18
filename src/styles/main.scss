@@ -107,27 +107,22 @@ a {
     z-index: 0;
   }
 
-  // Каждая буква «Resource» — отдельный слой в макете (angle: 5deg,
-  // индивидуальные top/left), чтобы получить рукописный подъём строки
+  // Слово целиком повёрнуто на 5deg (в макете так повёрнут каждый
+  // «летер»-слой после outline text — то есть весь текст был одним
+  // элементом с этим наклоном до конвертации в контуры)
   &__name {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 0;
+    top: 10px;
+    left: 4px;
     z-index: 1;
-  }
-
-  &__letter {
-    position: absolute;
-    display: block;
     font-family: $font-logo;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 400;
     line-height: 1;
     color: var(--color-text);
+    white-space: nowrap;
     transform: rotate(5deg);
-    transform-origin: top left;
+    transform-origin: left center;
   }
 
   &__tagline {
