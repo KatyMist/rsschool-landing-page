@@ -114,11 +114,13 @@ a {
     width: 92.52px;
     z-index: 1;
     font-family: $font-logo;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 400;
     line-height: 1;
     color: var(--color-text);
     white-space: nowrap;
+    transform: rotate(-6deg);
+    transform-origin: left bottom;
   }
 
   &__tagline {
