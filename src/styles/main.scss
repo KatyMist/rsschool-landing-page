@@ -196,17 +196,20 @@ a {
 
 .burger {
   display: none;
-  width: 32px;
-  height: 32px;
-  border: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-inverse);
+  border-radius: 999px;
   background: none;
   cursor: pointer;
   color: var(--color-text);
   flex-shrink: 0;
 
   svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
   .icon-close {
@@ -353,7 +356,19 @@ a {
   }
 
   .burger {
-    display: block;
+    display: flex;
+  }
+
+  // На планшете и мобильном пилюля переключателя темы крупнее (под тач-таргет)
+  .theme-toggle {
+    width: 104px;
+    height: 52px;
+    padding: 6px 8px;
+
+    &__circle {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
 
@@ -364,15 +379,5 @@ a {
 
   .header__actions {
     gap: 8px;
-  }
-
-  .theme-toggle {
-    width: 72px;
-    height: 36px;
-
-    &__circle {
-      width: 28px;
-      height: 28px;
-    }
   }
 }
