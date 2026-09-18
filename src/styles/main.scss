@@ -90,23 +90,42 @@ a {
 
 // ---------- Логотип (шапка и подвал) ----------
 .logo {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 2px;
-  height: $header-height;
+  width: 100px;
+  height: 60px;
   line-height: 1;
 
+  &__circle {
+    position: absolute;
+    top: 6px;
+    left: 31px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    z-index: 0;
+  }
+
   &__name {
+    position: relative;
+    z-index: 1;
     font-family: $font-logo;
-    font-size: 26px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 400;
     color: var(--color-text);
+    white-space: nowrap;
   }
 
   &__tagline {
+    position: relative;
+    z-index: 1;
     @include caption;
     color: var(--color-text-muted);
+    white-space: nowrap;
   }
 }
 
