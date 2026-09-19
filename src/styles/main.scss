@@ -314,25 +314,6 @@ a {
   }
 }
 
-// ---------- Footer ----------
-.footer {
-  background-color: var(--color-bg-secondary);
-  padding: 48px 0 24px;
-
-  &__inner {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-
-  &__copyright {
-    margin-top: 32px;
-    color: var(--color-text-on-accent);
-    font-size: 14px;
-  }
-}
-
 // ---------- Секции главной страницы (заготовка) ----------
 .section {
   padding: 80px 0;
