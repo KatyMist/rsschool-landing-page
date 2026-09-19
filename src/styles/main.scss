@@ -600,18 +600,19 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 16px;
   margin-top: 40px;
 }
 
+// В макете все три чёрточки одной ширины — активная отличается только цветом,
+// а не тем, что она шире остальных (как было раньше).
 .favorites__dot {
-  width: 8px;
-  height: 8px;
+  width: 40px;
+  height: 4px;
   border-radius: 999px;
   background-color: var(--border-primary);
 
   &--active {
-    width: 24px;
     background-color: var(--color-text);
   }
 }
