@@ -645,14 +645,17 @@ a {
   }
 }
 
-// Десктоп/ноутбук: масонри-сетка 2×2 из 4 фото — левая колонка 590/430, правая 430/590
-// (gap 40 создаёт суммарную высоту 1060, как в макете).
-// Планшет: остаются только 2 "фичевых" фото (about-1 и about-4, по скринам макета),
-// про-2/про-3 скрываются, а оставшиеся становятся квадратами 1:1 рядом друг с другом.
-// Мобилка: те же 2 фото, но в один столбец и с пропорцией 348:590.
+// Десктоп/ноутбук: 2 независимые флекс-колонки (не grid!) — с grid-template-rows: auto
+// высота строки берётся по САМОЙ высокой картинке в ряду и низкие (430) растягивались
+// align-items:stretch до высоты высоких (590). Колонки независимы: левая 590+430,
+// правая 430+590 — каждая своя сумма 1060 с общим gap 40, без связи по рядам.
+// Планшет: остаются только 2 "фичевых" фото (about-1 и about-4, по скринам макета) —
+// про-2/про-3 скрываются, каждая колонка схлопывается до одной квадратной 1:1 картинки.
+// Мобилка: те же 2 фото, но колонки становятся одним столбцом (about-1 затем about-4),
+// пропорция 348:590.
 .about__gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  align-items: flex-start;
   gap: 40px;
 
   @include tablet {
@@ -660,67 +663,54 @@ a {
   }
 
   @include mobile {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.about__col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 40px;
+
+  @include tablet {
+    gap: 24px;
+  }
+
+  @include mobile {
     gap: 16px;
   }
 }
 
 .about__img {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   border-radius: 20px;
 }
 
-.about__img--1 {
-  grid-column: 1;
-  grid-row: 1;
-  aspect-ratio: 660 / 590;
-
-  @include tablet {
-    aspect-ratio: 1 / 1;
-  }
-
-  @include mobile {
-    aspect-ratio: 348 / 590;
-  }
-}
-
-.about__img--2 {
-  grid-column: 1;
-  grid-row: 2;
-  aspect-ratio: 660 / 430;
-
-  @include tablet {
-    display: none;
-  }
-}
-
-.about__img--3 {
-  grid-column: 2;
-  grid-row: 1;
-  aspect-ratio: 660 / 430;
-
-  @include tablet {
-    display: none;
-  }
-}
-
+.about__img--1,
 .about__img--4 {
-  grid-column: 2;
-  grid-row: 2;
   aspect-ratio: 660 / 590;
 
   @include tablet {
-    grid-column: 2;
-    grid-row: 1;
     aspect-ratio: 1 / 1;
   }
 
   @include mobile {
-    grid-column: 1;
-    grid-row: 2;
     aspect-ratio: 348 / 590;
+  }
+}
+
+.about__img--2,
+.about__img--3 {
+  aspect-ratio: 660 / 430;
+
+  @include tablet {
+    display: none;
   }
 }
 
