@@ -555,9 +555,22 @@ a {
   }
 }
 
-.favorites__slide {
+// Часть 1: показываем только первый слайд (track стоит на месте, слайды 2/3
+// уходят за границу viewport благодаря overflow:hidden). Переключение (transform
+// на .favorites__track) и клонирование для цикличности - JS части 2.
+.favorites__viewport {
+  overflow: hidden;
   width: 100%;
   max-width: 480px;
+}
+
+.favorites__track {
+  display: flex;
+}
+
+.favorites__slide {
+  flex: 0 0 100%;
+  width: 100%;
 }
 
 .favorites__image {
