@@ -77,41 +77,467 @@
     <main>
       <section class="section catalog">
         <div class="container">
-          <h1 class="section__title">Catalog</h1>
+          <h1 class="catalog__heading">Behind each of our cups hides an <em>amazing surprise</em></h1>
 
           <div class="catalog__categories">
-            <button class="catalog__category catalog__category--active">Coffee</button>
-            <button class="catalog__category">Tea</button>
-            <button class="catalog__category">Desserts</button>
+            <button type="button" class="catalog__category catalog__category--active" data-category-tab="coffee">
+              <span class="catalog__category-icon" aria-hidden="true">☕</span>
+              Coffee
+            </button>
+            <button type="button" class="catalog__category" data-category-tab="tea">
+              <span class="catalog__category-icon" aria-hidden="true">🫖</span>
+              Tea
+            </button>
+            <button type="button" class="catalog__category" data-category-tab="dessert">
+              <span class="catalog__category-icon" aria-hidden="true">🍰</span>
+              Dessert
+            </button>
           </div>
 
-          <div class="catalog__grid">
-            <article class="card">
-              <img class="card__image" src="" alt="Latte" />
+          <div class="catalog__grid" data-catalog-grid>
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Irish coffee"
+              data-desc="Fragrant black coffee with Jameson Irish whiskey and whipped milk"
+              data-price="$7.00"
+              data-image="/src/assets/image/coffee-4.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-4.png" alt="Irish coffee" loading="lazy" />
               <div class="card__body">
-                <h3 class="card__title">Latte</h3>
+                <h3 class="card__title">Irish coffee</h3>
+                <p class="card__desc">Fragrant black coffee with Jameson Irish whiskey and whipped milk</p>
+                <p class="card__price">$7.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Kahlua coffee"
+              data-desc="Classic coffee with milk and Kahlua liqueur under a cap of frothed milk"
+              data-price="$7.00"
+              data-image="/src/assets/image/coffee-5.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-5.png" alt="Kahlua coffee" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Kahlua coffee</h3>
+                <p class="card__desc">Classic coffee with milk and Kahlua liqueur under a cap of frothed milk</p>
+                <p class="card__price">$7.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Honey raf"
+              data-desc="Espresso with frothed milk, cream and aromatic honey"
+              data-price="$5.50"
+              data-image="/src/assets/image/coffee-6.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-6.png" alt="Honey raf" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Honey raf</h3>
+                <p class="card__desc">Espresso with frothed milk, cream and aromatic honey</p>
                 <p class="card__price">$5.50</p>
               </div>
             </article>
-            <!-- more cards are added dynamically / duplicated -->
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Ice cappuccino"
+              data-desc="Cappuccino with soft thick foam in summer version with ice"
+              data-price="$5.00"
+              data-image="/src/assets/image/coffee-7.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-7.png" alt="Ice cappuccino" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Ice cappuccino</h3>
+                <p class="card__desc">Cappuccino with soft thick foam in summer version with ice</p>
+                <p class="card__price">$5.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Espresso"
+              data-desc="Classic black coffee"
+              data-price="$4.50"
+              data-image="/src/assets/image/coffee-8.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-8.png" alt="Espresso" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Espresso</h3>
+                <p class="card__desc">Classic black coffee</p>
+                <p class="card__price">$4.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Latte"
+              data-desc="Espresso coffee with the addition of steamed milk and dense milk foam"
+              data-price="$5.50"
+              data-image="/src/assets/image/coffee-9.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-9.png" alt="Latte" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Latte</h3>
+                <p class="card__desc">Espresso coffee with the addition of steamed milk and dense milk foam</p>
+                <p class="card__price">$5.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Latte macchiato"
+              data-desc="Espresso with frothed milk and chocolate"
+              data-price="$5.50"
+              data-image="/src/assets/image/coffee-10.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-10.png" alt="Latte macchiato" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Latte macchiato</h3>
+                <p class="card__desc">Espresso with frothed milk and chocolate</p>
+                <p class="card__price">$5.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="coffee"
+              data-name="Coffee with cognac"
+              data-desc="Fragrant black coffee with cognac and whipped cream"
+              data-price="$6.50"
+              data-image="/src/assets/image/coffee-11.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Cinnamon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/coffee-11.png" alt="Coffee with cognac" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Coffee with cognac</h3>
+                <p class="card__desc">Fragrant black coffee with cognac and whipped cream</p>
+                <p class="card__price">$6.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="tea" hidden
+              data-name="Moroccan"
+              data-desc="Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint"
+              data-price="$4.50"
+              data-image="/src/assets/image/tea-1.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Lemon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/tea-1.png" alt="Moroccan" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Moroccan</h3>
+                <p class="card__desc">Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint</p>
+                <p class="card__price">$4.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="tea" hidden
+              data-name="Ginger"
+              data-desc="Original black tea with fresh ginger, lemon and honey"
+              data-price="$5.00"
+              data-image="/src/assets/image/tea-2.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Lemon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/tea-2.png" alt="Ginger" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Ginger</h3>
+                <p class="card__desc">Original black tea with fresh ginger, lemon and honey</p>
+                <p class="card__price">$5.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="tea" hidden
+              data-name="Cranberry"
+              data-desc="Invigorating black tea with cranberry and honey"
+              data-price="$5.00"
+              data-image="/src/assets/image/tea-3.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Lemon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/tea-3.png" alt="Cranberry" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Cranberry</h3>
+                <p class="card__desc">Invigorating black tea with cranberry and honey</p>
+                <p class="card__price">$5.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="tea" hidden
+              data-name="Sea buckthorn"
+              data-desc="Toning sweet black tea with sea buckthorn, fresh thyme and cinnamon"
+              data-price="$5.50"
+              data-image="/src/assets/image/tea-4.png"
+              data-sizes="S 200 ml|M 300 ml|L 400 ml"
+              data-additives="Sugar,Lemon,Syrup"
+            >
+              <img class="card__image" src="/src/assets/image/tea-4.png" alt="Sea buckthorn" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Sea buckthorn</h3>
+                <p class="card__desc">Toning sweet black tea with sea buckthorn, fresh thyme and cinnamon</p>
+                <p class="card__price">$5.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Marble cheesecake"
+              data-desc="Philadelphia cheese with lemon zest on a light sponge cake and red currant jam"
+              data-price="$3.50"
+              data-image="/src/assets/image/dessert-1.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-1.png" alt="Marble cheesecake" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Marble cheesecake</h3>
+                <p class="card__desc">Philadelphia cheese with lemon zest on a light sponge cake and red currant jam</p>
+                <p class="card__price">$3.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Red velvet"
+              data-desc="Layer cake with cream cheese frosting"
+              data-price="$4.00"
+              data-image="/src/assets/image/dessert-2.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-2.png" alt="Red velvet" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Red velvet</h3>
+                <p class="card__desc">Layer cake with cream cheese frosting</p>
+                <p class="card__price">$4.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Cheesecakes"
+              data-desc="Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar"
+              data-price="$4.50"
+              data-image="/src/assets/image/dessert-3.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-3.png" alt="Cheesecakes" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Cheesecakes</h3>
+                <p class="card__desc">Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar</p>
+                <p class="card__price">$4.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Creme brulee"
+              data-desc="Delicate creamy dessert in a caramel basket with wild berries"
+              data-price="$4.00"
+              data-image="/src/assets/image/dessert-4.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-4.png" alt="Creme brulee" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Creme brulee</h3>
+                <p class="card__desc">Delicate creamy dessert in a caramel basket with wild berries</p>
+                <p class="card__price">$4.00</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Pancakes"
+              data-desc="Tender pancakes with strawberry jam and fresh strawberries"
+              data-price="$4.50"
+              data-image="/src/assets/image/dessert-5.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-5.png" alt="Pancakes" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Pancakes</h3>
+                <p class="card__desc">Tender pancakes with strawberry jam and fresh strawberries</p>
+                <p class="card__price">$4.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Honey cake"
+              data-desc="Classic honey cake with delicate custard"
+              data-price="$4.50"
+              data-image="/src/assets/image/dessert-6.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-6.png" alt="Honey cake" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Honey cake</h3>
+                <p class="card__desc">Classic honey cake with delicate custard</p>
+                <p class="card__price">$4.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Chocolate cake"
+              data-desc="Cake with hot chocolate filling and nuts with dried apricots"
+              data-price="$5.50"
+              data-image="/src/assets/image/dessert-7.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-7.png" alt="Chocolate cake" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Chocolate cake</h3>
+                <p class="card__desc">Cake with hot chocolate filling and nuts with dried apricots</p>
+                <p class="card__price">$5.50</p>
+              </div>
+            </article>
+
+            <article
+              class="card"
+              data-card="dessert" hidden
+              data-name="Black forest"
+              data-desc="A combination of thin sponge cake with cherry jam and light chocolate mousse"
+              data-price="$6.50"
+              data-image="/src/assets/image/dessert-8.png"
+              data-sizes="S 50 g|M 100 g|L 200 g"
+              data-additives="Berries,Nuts,Jam"
+            >
+              <img class="card__image" src="/src/assets/image/dessert-8.png" alt="Black forest" loading="lazy" />
+              <div class="card__body">
+                <h3 class="card__title">Black forest</h3>
+                <p class="card__desc">A combination of thin sponge cake with cherry jam and light chocolate mousse</p>
+                <p class="card__price">$6.50</p>
+              </div>
+            </article>
+          </div>
+
+          <button type="button" class="catalog__reload" data-catalog-reload aria-label="Show more" hidden>
+            <span aria-hidden="true">&#8635;</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Section 5: contacts -->
+      <section id="contacts" class="section contacts">
+        <div class="container">
+          <div class="contacts__card">
+            <div class="contacts__brand">
+              <h2 class="contacts__title">Sip, Savor, Smile. <em>It&rsquo;s coffee time!</em></h2>
+
+              <div class="contacts__socials">
+                <a href="#" class="contacts__social" aria-label="X (Twitter)">
+                  <img class="contacts__social-icon contacts__social-icon--light" src="/src/assets/icons/button-X-1.svg" alt="" />
+                  <img class="contacts__social-icon contacts__social-icon--dark" src="/src/assets/icons/button-X-2.svg" alt="" />
+                </a>
+                <a href="#" class="contacts__social" aria-label="Instagram">
+                  <img class="contacts__social-icon contacts__social-icon--light" src="/src/assets/icons/button-instagram-1.svg" alt="" />
+                  <img class="contacts__social-icon contacts__social-icon--dark" src="/src/assets/icons/button-instagram-2.svg" alt="" />
+                </a>
+                <a href="#" class="contacts__social" aria-label="Facebook">
+                  <img class="contacts__social-icon contacts__social-icon--light" src="/src/assets/icons/button-F-1.svg" alt="" />
+                  <img class="contacts__social-icon contacts__social-icon--dark" src="/src/assets/icons/button-F-2.svg" alt="" />
+                </a>
+              </div>
+            </div>
+
+            <div class="contacts__info">
+              <h3 class="contacts__heading">Contact us</h3>
+
+              <ul class="contacts__list">
+                <li class="contacts__item">
+                  <img class="contacts__icon" src="/src/assets/icons/pin-alt-1.svg" alt="" width="20" height="20" />
+                  <span>8558 Green Rd., LA</span>
+                </li>
+                <li class="contacts__item">
+                  <img class="contacts__icon" src="/src/assets/icons/phone-1.svg" alt="" width="20" height="20" />
+                  <span>+1 (603) 555-0123</span>
+                </li>
+                <li class="contacts__item">
+                  <img class="contacts__icon" src="/src/assets/icons/cloc1.svg" alt="" width="20" height="20" />
+                  <span>Mon&ndash;Sat: 9:00&ndash;23:00</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="container footer__inner">
-        <div class="footer__logo logo">
-          <img class="logo__img logo__img--light" src="/src/assets/icons/logo-1.png" alt="Resource Coffee House" />
-          <img class="logo__img logo__img--dark" src="/src/assets/icons/logo-2.png" alt="Resource Coffee House" />
+    <div class="modal" data-modal hidden>
+      <div class="modal__panel">
+        <img class="modal__image" data-modal-image src="" alt="" />
+
+        <div class="modal__body">
+          <h3 class="modal__title" data-modal-title></h3>
+          <p class="modal__desc" data-modal-desc></p>
+
+          <p class="modal__label">Size</p>
+          <div class="modal__chips" data-modal-sizes></div>
+
+          <p class="modal__label">Additives</p>
+          <div class="modal__chips" data-modal-additives></div>
+
+          <div class="modal__total">
+            <span class="modal__total-label">Total:</span>
+            <span class="modal__total-value" data-modal-total></span>
+          </div>
+
+          <p class="modal__disclaimer">
+            <span class="modal__disclaimer-icon" aria-hidden="true">&#9432;</span>
+            The cost is not final. Download our mobile app to see the final price and place your order. Earn loyalty points and enjoy your favorite coffee with up to 20% discount.
+          </p>
+
+          <button type="button" class="modal__close-btn" data-modal-close>Close</button>
         </div>
-        <div class="footer__contacts">
-          <p>123 Example St., LA</p>
-          <p>+1 900 000-00-00</p>
-        </div>
+
+        <button type="button" class="modal__close" data-modal-close aria-label="Close">&times;</button>
       </div>
-      <p class="container footer__copyright">© 2026 Resource Coffee House. RS School student project.</p>
-    </footer>
+    </div>
 
     <script type="module" src="/src/scripts/main.js"></script>
   </body>
