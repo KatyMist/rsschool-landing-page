@@ -538,6 +538,11 @@ a {
     position: static;
     transform: none;
   }
+
+  // На мобилке стрелки убираем — переключение слайдов будет свайпом (часть 2, JS).
+  @include mobile {
+    display: none;
+  }
 }
 
 .favorites__arrow-icon {
