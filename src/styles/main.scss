@@ -184,9 +184,11 @@ a {
 }
 
 // ---------- Header ----------
+// top: 8px, а не 0 — иначе при скролле шапка залипает вплотную к самому краю окна,
+// без единого пикселя воздуха сверху.
 .header {
   position: sticky;
-  top: 0;
+  top: 8px;
   z-index: 100;
   background-color: var(--color-header-bg);
 
