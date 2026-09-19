@@ -632,10 +632,14 @@ a {
 // та же логика плавного clamp-масштабирования, что уже используется в hero/favorites.
 // max-width 1360 — в макете текст оборачивается ровно в ширину галереи под ним,
 // а не тянется на всю резиновую ширину .container (тот же потолок ниже у .about__gallery).
+// letter-spacing: в макете (Figma) при 60px/1360px текст переносится в 3 строки (225px),
+// а у Chrome/Inter при letter-spacing:normal вторая строка на ~10px шире 1360 и уходит
+// в 4-ю строку (300px) — микро-подтяжка трекинга возвращает перенос в 3 строки как в макете.
 .about__lead {
   @include heading-2;
   max-width: 1360px;
   margin-bottom: 40px;
+  letter-spacing: -0.3px;
 
   em {
     font-style: italic;
