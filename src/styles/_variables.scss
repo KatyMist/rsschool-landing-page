@@ -9,8 +9,4 @@ $bp-mobile-min: 380px; // минимальная поддерживаемая ш
 $font-main: 'Inter', sans-serif;
 $font-logo: 'Caveat Brush', cursive;
 
-// 1440 = полная ширина рамки по Figma (1360 контента + 40px паддинг с каждой стороны).
-// .container сам добавляет padding: 0 40px, поэтому max-width должен быть именно 1440,
-// иначе паддинг задваивается и контент уезжает на 80px от края вместо 40px.
-$container-width: 1440px;
 $header-height: 60px;

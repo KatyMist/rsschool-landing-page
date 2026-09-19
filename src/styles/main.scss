@@ -34,10 +34,10 @@ a {
   color: inherit;
 }
 
+// Без max-width: отступ всегда ровно 40px от реального края окна,
+// без центрирующих полей на широких мониторах.
 .container {
   width: 100%;
-  max-width: $container-width;
-  margin: 0 auto;
   padding: 0 40px;
 
   @include tablet {
