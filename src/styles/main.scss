@@ -339,9 +339,15 @@ a {
 
 // ---------- Hero ----------
 // Figma: hero frame width 1440 / height 644, padding-left/right 40px (= .container),
-// no vertical padding of its own — section height comes from .hero__card min-height.
+// height 644 = высота именно .hero__card. Небольшой отступ сверху нужен, чтобы карточка
+// не прилипала к прилипающей шапке (в макете точного значения нет — уточнить у дизайна).
 .hero {
   padding: 0;
+  margin-top: 24px;
+
+  @include mobile {
+    margin-top: 16px;
+  }
 }
 
 .hero__card {
