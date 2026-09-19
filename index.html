@@ -94,10 +94,37 @@
       </section>
 
       <!-- Section 2: favorite coffee / menu teaser -->
+      <!-- Section 2: favorite coffee slider -->
       <section id="favorites" class="section favorites">
         <div class="container">
-          <h2 class="section__title">Favorite coffee</h2>
-          <p>A slider with our best-selling drinks and a link to the full catalog page.</p>
+          <h2 class="favorites__title section__title">Choose your <em>favorite</em> coffee</h2>
+
+          <div class="favorites__slider">
+            <button class="favorites__arrow favorites__arrow--prev" type="button" aria-label="Previous drink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M15 18l-6-6 6-6" />
+              </svg>
+            </button>
+
+            <div class="favorites__slide">
+              <img class="favorites__image" src="/src/assets/image/coffee-1.png" alt="S'mores Frappuccino" />
+              <h3 class="favorites__name">S'mores Frappuccino</h3>
+              <p class="favorites__desc">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being topped with oat milk.</p>
+              <p class="favorites__price">$5.50</p>
+            </div>
+
+            <button class="favorites__arrow favorites__arrow--next" type="button" aria-label="Next drink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </button>
+          </div>
+
+          <div class="favorites__dots" aria-hidden="true">
+            <span class="favorites__dot favorites__dot--active"></span>
+            <span class="favorites__dot"></span>
+            <span class="favorites__dot"></span>
+          </div>
         </div>
       </section>
 
