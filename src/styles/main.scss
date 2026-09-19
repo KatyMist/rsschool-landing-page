@@ -100,8 +100,8 @@ a {
 .menu-icon {
   position: absolute;
   inset: 0;
-  width: 72px;
-  height: 28px;
+  width: 100%;
+  height: 100%;
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
@@ -1005,17 +1005,29 @@ a {
     display: none;
   }
 
+  // Внутри бургер-меню кнопка "Menu" крупнее, чем в хедере (72x28) - здесь она
+  // равноправный пункт списка, а не мелкая иконка сбоку.
   .nav__menu-link {
     display: block;
+    width: 130px;
+    height: 50px;
+    margin-top: 40px;
   }
 
+  // Полноэкранная панель бургер-меню: та же заливка, что у шапки (та "видна"
+  // сверху панели, потому что панель начинается с $header-height), ссылки
+  // не прижаты влево, а отцентрированы и по горизонтали, и по вертикали.
   .nav {
     position: fixed;
     inset: $header-height 0 0 0;
+    z-index: 90;
     background-color: var(--color-header-bg);
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
     padding: 24px;
+    overflow-y: auto;
     transform: translateX(100%);
     transition: transform 0.3s ease;
 
