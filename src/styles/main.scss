@@ -337,6 +337,118 @@ a {
   }
 }
 
+// ---------- Hero ----------
+// Figma: hero frame width 1440 / height 644, padding-left/right 40px (= .container),
+// no vertical padding of its own — section height comes from .hero__card min-height.
+.hero {
+  padding: 0;
+}
+
+.hero__card {
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  padding: 100px;
+  min-height: 644px;
+
+  @include tablet {
+    min-height: 0;
+  }
+
+  @include mobile {
+    padding: 24px;
+  }
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 530px;
+
+  @include mobile {
+    max-width: 316px;
+  }
+}
+
+.hero__title {
+  @include heading-1;
+  color: var(--text-inverse);
+  margin-bottom: 24px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--text-accent);
+  }
+}
+
+.hero__text {
+  @include body-medium;
+  color: var(--text-inverse);
+  margin-bottom: 32px;
+  max-width: 530px;
+
+  @include mobile {
+    max-width: 316px;
+  }
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 78px;
+  border-radius: 999px;
+  background-color: var(--text-inverse);
+  color: var(--ink);
+  transition: opacity 0.2s ease;
+
+  @include link-button-text;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.hero__cta-icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+}
+
+@include tablet {
+  .hero__cta-icon--light {
+    display: block;
+  }
+}
+
+[data-theme='dark'] {
+  .hero__cta {
+    background-color: var(--ink);
+    color: var(--text-inverse);
+  }
+
+  @include tablet {
+    .hero__cta-icon--light {
+      display: none;
+    }
+
+    .hero__cta-icon--dark {
+      display: block;
+    }
+  }
+}
+
 // ---------- Каталог ----------
 .catalog {
   &__categories {
