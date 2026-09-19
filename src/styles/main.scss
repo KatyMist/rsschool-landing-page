@@ -1,0 +1,1378 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'typography' as *;
+@use 'themes';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @include body-medium;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.no-scroll {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// Для заголовков, нужных только для правильной иерархии/скринридеров,
+// без визуального дублирования уже видимого текста на странице.
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Без max-width: отступ всегда ровно 40px от реального края окна,
+// без центрирующих полей на широких мониторах.
+.container {
+  width: 100%;
+  padding: 0 40px;
+
+  @include tablet {
+    padding: 0 24px;
+  }
+
+  @include mobile-min {
+    padding: 0 16px;
+  }
+}
+
+// ---------- Кнопки (button-primary / button-secondary) ----------
+.btn {
+  @include link-button-text;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.btn--primary {
+  background-color: var(--color-accent);
+  color: var(--bg-page);
+
+  &:hover {
+    background-color: var(--color-text);
+    color: var(--color-text-on-accent);
+  }
+}
+
+.btn--secondary {
+  border-color: var(--color-border);
+  color: var(--color-text);
+
+  &:hover {
+    background-color: var(--color-bg-secondary);
+    color: var(--color-text-on-accent);
+  }
+}
+
+// ---------- Menu CTA (готовые SVG из макета: 72x28, default/active на каждую тему) ----------
+.menu-cta {
+  position: relative;
+  display: inline-block;
+  width: 72px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.menu-icon {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.menu-icon--light {
+  opacity: 1;
+}
+
+.menu-cta:hover .menu-icon--light,
+.menu-cta:focus-visible .menu-icon--light {
+  opacity: 0;
+}
+
+.menu-cta:hover .menu-icon--light-active,
+.menu-cta:focus-visible .menu-icon--light-active {
+  opacity: 1;
+}
+
+[data-theme='dark'] {
+  .menu-icon--light,
+  .menu-icon--light-active {
+    opacity: 0;
+  }
+
+  .menu-icon--dark {
+    opacity: 1;
+  }
+
+  .menu-cta:hover .menu-icon--dark,
+  .menu-cta:focus-visible .menu-icon--dark {
+    opacity: 0;
+  }
+
+  .menu-cta:hover .menu-icon--dark-active,
+  .menu-cta:focus-visible .menu-icon--dark-active {
+    opacity: 1;
+  }
+}
+
+.header__menu-btn {
+  flex-shrink: 0;
+}
+
+// Внутри выезжающего меню (планшет/мобильный) — скрыт на десктопе
+.nav__menu-link {
+  display: none;
+  margin-top: 24px;
+}
+
+// ---------- Логотип (шапка и подвал) ----------
+// Готовые растровые лого из Figma: logo-1 — для светлой темы, logo-2 — для тёмной.
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.logo__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.logo__img--dark {
+  display: none;
+}
+
+[data-theme='dark'] {
+  .logo__img--light {
+    display: none;
+  }
+
+  .logo__img--dark {
+    display: block;
+  }
+}
+
+// ---------- Header ----------
+// top:8px вместо top:0 создавал ДЫРУ над шапкой — у sticky-элемента top:8px значит,
+// что сама его коробка начинается только с 8px, а первые 8px сверху ничем не заняты,
+// и в них видно контент, который скроллится ПОД шапкой (баг на скрине). Вместо этого —
+// top:0 (коробка с самого верха) + padding-top:8px, чтобы "воздух" был закрашен
+// тем же background-color шапки, а не дырой, в которую видно контент под ней.
+.header {
+  position: sticky;
+  top: 0;
+  padding-top: 8px;
+  z-index: 100;
+  background-color: var(--color-header-bg);
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: $header-height;
+    gap: 24px;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  list-style: none;
+
+  &__link {
+    @include link-button-text;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+
+    &--active {
+      color: var(--color-accent);
+    }
+  }
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+// Переключатель темы: пилюля с двумя кружками (солнце/луна)
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 88px;
+  height: 44px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  &__circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  // По умолчанию (светлая тема) активен «солнце»: заливка accent + светлая иконка.
+  // «Луна» неактивна: без заливки + тёмная иконка.
+  &__circle--sun {
+    background-color: var(--color-accent);
+    color: var(--bg-page);
+  }
+
+  &__circle--moon {
+    background-color: transparent;
+    color: var(--color-text);
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+[data-theme='dark'] .theme-toggle {
+  .theme-toggle__circle--sun {
+    background-color: transparent;
+    color: var(--color-text);
+  }
+
+  .theme-toggle__circle--moon {
+    background-color: var(--color-accent);
+    color: var(--bg-page);
+  }
+}
+
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-inverse);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  color: var(--color-text);
+  flex-shrink: 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-close {
+    display: none;
+  }
+
+  &[aria-expanded='true'] {
+    .icon-menu {
+      display: none;
+    }
+
+    .icon-close {
+      display: block;
+    }
+  }
+}
+
+// ---------- Секции главной страницы (заготовка) ----------
+.section {
+  padding: 80px 0;
+
+  &__title {
+    @include heading-2;
+    margin-bottom: 24px;
+  }
+}
+
+// ---------- Hero ----------
+// Figma: hero frame width 1440 / height 644, padding-left/right 40px (= .container),
+// height 644 = высота именно .hero__card. Небольшой отступ сверху нужен, чтобы карточка
+// не прилипала к прилипающей шапке (в макете точного значения нет — уточнить у дизайна).
+.hero {
+  padding: 0;
+  margin-top: 24px;
+
+  @include mobile {
+    margin-top: 16px;
+  }
+}
+
+.hero__card {
+  position: relative;
+  border-radius: 40px;
+  overflow: hidden;
+  padding: 100px;
+  // Пропорция 1360:644 из макета вместо фиксированной высоты — при сужении окна
+  // (контейнер теперь резиновый) карточка плавно уменьшается по высоте вместе
+  // с шириной, а не остаётся неизменно высокой относительно узкой ширины.
+  aspect-ratio: 1360 / 644;
+
+  @include tablet {
+    aspect-ratio: unset;
+    // Десктопные 100px паддинга на планшетной ширине съедают слишком много места —
+    // заголовок 72px переносится на кучу строк и карточка "растягивается вниз".
+    padding: 48px;
+  }
+
+  @include mobile {
+    padding: 24px;
+    // Чтобы на телефоне при открытии сайта было видно только hero, а следующая
+    // секция не "подглядывала" снизу без скролла — высота карточки = весь экран
+    // за вычетом шапки и отступа сверху. svh с фолбэком на vh для старых браузеров.
+    min-height: calc(100vh - #{$header-height} - 16px);
+    min-height: calc(100svh - #{$header-height} - 16px);
+  }
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 530px;
+
+  @include mobile {
+    max-width: 316px;
+  }
+}
+
+.hero__title {
+  @include heading-1;
+  color: var(--text-inverse);
+  margin-bottom: 24px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--text-accent);
+  }
+}
+
+.hero__text {
+  @include body-medium;
+  color: var(--text-inverse);
+  margin-bottom: 32px;
+  max-width: 530px;
+
+  @include mobile {
+    max-width: 316px;
+  }
+}
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px 78px;
+  border-radius: 999px;
+  background-color: var(--text-inverse);
+  color: var(--ink);
+  transition: opacity 0.2s ease;
+
+  @include link-button-text;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.hero__cta-icon {
+  display: none;
+  width: 20px;
+  height: 20px;
+}
+
+@include tablet {
+  .hero__cta-icon--light {
+    display: block;
+  }
+}
+
+[data-theme='dark'] {
+  .hero__cta {
+    background-color: var(--ink);
+    color: var(--text-inverse);
+  }
+
+  @include tablet {
+    .hero__cta-icon--light {
+      display: none;
+    }
+
+    .hero__cta-icon--dark {
+      display: block;
+    }
+  }
+}
+
+// ---------- Favorite coffee (слайдер) ----------
+.favorites {
+  text-align: center;
+
+  &__title {
+    margin-bottom: 64px;
+
+    em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    @include mobile {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+// Десктоп/ноутбук: стрелки прибиты к краям контейнера (position:absolute),
+// картинка со слотом остаётся по центру независимо от них.
+// Планшет/мобилка (по скринам макета): стрелки "прилипают" вплотную к картинке —
+// это уже просто соседние элементы в ряду, без абсолютного позиционирования.
+.favorites__slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+
+  @include tablet {
+    gap: 16px;
+  }
+
+  @include mobile {
+    gap: 8px;
+  }
+}
+
+.favorites__arrow {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  // display самих img управляется через .favorites__arrow-icon(--light/--dark) ниже —
+  // тут только геометрия, иначе этот селектор (специфичность выше класса) перебивает
+  // переключение по теме и оба варианта показываются одновременно.
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  &--next {
+    left: auto;
+    right: 0;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  @include tablet {
+    position: static;
+    transform: none;
+  }
+
+  // На мобилке стрелки убираем — переключение слайдов будет свайпом (часть 2, JS).
+  @include mobile {
+    display: none;
+  }
+}
+
+.favorites__arrow-icon {
+  display: none;
+}
+
+.favorites__arrow-icon--light {
+  display: block;
+}
+
+[data-theme='dark'] {
+  .favorites__arrow-icon--light {
+    display: none;
+  }
+
+  .favorites__arrow-icon--dark {
+    display: block;
+  }
+}
+
+// Часть 1: показываем только первый слайд (track стоит на месте, слайды 2/3
+// уходят за границу viewport благодаря overflow:hidden). Переключение (transform
+// на .favorites__track) и клонирование для цикличности - JS части 2.
+.favorites__viewport {
+  overflow: hidden;
+  width: 100%;
+  max-width: 480px;
+}
+
+.favorites__track {
+  display: flex;
+  transition: transform 0.4s ease;
+}
+
+.favorites__slide {
+  flex: 0 0 100%;
+  width: 100%;
+}
+
+.favorites__image {
+  display: block;
+  height: 400px;
+  width: auto;
+  max-width: 100%;
+  margin: 0 auto 32px;
+  object-fit: contain;
+
+  @include tablet {
+    height: 320px;
+  }
+
+  @include mobile {
+    height: 260px;
+    margin-bottom: 24px;
+  }
+}
+
+.favorites__name {
+  @include heading-3;
+  margin-bottom: 12px;
+}
+
+.favorites__desc {
+  @include body-medium;
+  color: var(--color-text-muted);
+  margin-bottom: 16px;
+}
+
+.favorites__price {
+  @include heading-3;
+}
+
+.favorites__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+// В макете все три чёрточки одной ширины — активная отличается только цветом,
+// а не тем, что она шире остальных (как было раньше).
+.favorites__dot {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background-color: var(--border-primary);
+
+  &--active {
+    background-color: var(--color-text);
+  }
+}
+
+// ---------- About ----------
+// Лид-абзац визуально в масштабе heading-2 (60px → 32px на мобилке), хотя это <p>, а не заголовок —
+// та же логика плавного clamp-масштабирования, что уже используется в hero/favorites.
+// БЕЗ max-width: текст и галерея ниже тянутся на всю резиновую ширину .container, как hero-картинка —
+// потолок в 1360 оставлял пустую полосу справа на широком мониторе, а по макету пустоты быть не должно.
+// letter-spacing: в макете (Figma) при 60px/1360px текст переносится в 3 строки (225px),
+// а у Chrome/Inter при letter-spacing:normal вторая строка на ~10px шире 1360 и уходит
+// в 4-ю строку (300px) — микро-подтяжка трекинга возвращает перенос в 3 строки как в макете.
+.about__lead {
+  @include heading-2;
+  margin-bottom: 40px;
+  letter-spacing: -0.3px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  @include mobile {
+    margin-bottom: 24px;
+  }
+}
+
+// Десктоп/ноутбук: 2 независимые флекс-колонки (не grid!) — с grid-template-rows: auto
+// высота строки берётся по САМОЙ высокой картинке в ряду и низкие (430) растягивались
+// align-items:stretch до высоты высоких (590). Колонки независимы: левая 590+430,
+// правая 430+590 — каждая своя сумма 1060 с общим gap 40, без связи по рядам.
+// Планшет И мобилка: остаются только 2 "фичевых" фото (about-1 и about-4) — но НЕ рядом,
+// а друг под другом (ряды, не колонки) — flex-direction:column уже с планшетного брейкпоинта,
+// про-2/про-3 скрываются на обоих.
+// БЕЗ max-width, симметрично тексту выше — обе части резиновые, без потолка, без пустот справа.
+.about__gallery {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+
+  @include tablet {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  @include mobile {
+    gap: 16px;
+  }
+}
+
+.about__col {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 40px;
+
+  @include tablet {
+    gap: 24px;
+  }
+
+  @include mobile {
+    gap: 16px;
+  }
+}
+
+.about__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.about__img--1,
+.about__img--4 {
+  aspect-ratio: 660 / 590;
+
+  @include tablet {
+    aspect-ratio: 1 / 1;
+  }
+
+  @include mobile {
+    aspect-ratio: 348 / 590;
+  }
+}
+
+.about__img--2,
+.about__img--3 {
+  aspect-ratio: 660 / 430;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+// ---------- Mobile app ----------
+// Обе колонки резиновые (flex:1 1 0), без жёстких max-width — тот же подход, что и в About,
+// после истории с "пустотой справа" на широких мониторах: 630/630 в макете — это просто
+// пропорция при 1440, а не потолок.
+.app__inner {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+}
+
+.app__content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.app__title {
+  @include heading-2;
+  margin-bottom: 24px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+}
+
+.app__text {
+  @include body-medium;
+  color: var(--color-text);
+  margin-bottom: 40px;
+}
+
+.app__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+// Кнопки — готовые SVG 200x64 с текстом внутри (как favorites__arrow), размер фиксирован
+// на всех брейкпоинтах по макету, только меняются местами light/dark варианты.
+.app__store-btn {
+  display: block;
+  width: 200px;
+  height: 64px;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.app__store-icon {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.app__store-icon--light {
+  display: block;
+}
+
+[data-theme='dark'] {
+  .app__store-icon--light {
+    display: none;
+  }
+
+  .app__store-icon--dark {
+    display: block;
+  }
+}
+
+.app__images {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.app__phones {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+// ---------- Contacts ----------
+// Карточка использует тот же паттерн паддингов, что и .hero__card
+// (100 / 48 / 24 на десктоп/таблет/мобилку) - это уже устоявшийся
+// компонент-паттерн "карточка" в макете, а не совпадение.
+.contacts {
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    padding: 100px;
+    border-radius: 40px;
+    background-color: var(--bg-container);
+
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 48px;
+    }
+
+    @include mobile {
+      padding: 24px;
+      gap: 32px;
+    }
+  }
+
+  // Обе колонки одинаковой ширины 530px - 530 + 100(gap) + 530 = 1160,
+  // ровно контентная ширина карточки (1360 - 2*100 паддинга). На планшете/
+  // мобилке карточка становится колонкой, ширина колонок = 100%.
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 530px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    @include heading-2;
+    color: var(--text-inverse);
+    max-width: 530px;
+
+    em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--text-accent);
+    }
+
+    @include mobile {
+      max-width: 316px;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__social {
+    display: block;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__social-icon {
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    &--light {
+      display: block;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 530px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__heading {
+    @include heading-3;
+    color: var(--text-inverse);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include body-medium;
+    color: var(--text-inverse);
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+
+  &__link {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--text-accent);
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .contacts__social-icon--light {
+    display: none;
+  }
+
+  .contacts__social-icon--dark {
+    display: block;
+  }
+}
+
+// ---------- Каталог ----------
+.catalog {
+  &__heading {
+    @include heading-2;
+    max-width: 850px;
+    margin: 0 auto 32px;
+    text-align: center;
+
+    em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+  }
+
+  &__categories {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  &__category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--color-text-muted);
+    @include link-button-text;
+    cursor: pointer;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-text);
+    }
+
+    &--active {
+      color: var(--color-text);
+    }
+  }
+
+  &__category-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    border: 1px solid var(--color-border);
+    font-size: 16px;
+    line-height: 1;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+
+  &__category--active &__category-icon {
+    background-color: var(--color-border);
+    border-color: var(--color-text);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 310px);
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  // Виден только на таблете/мобилке, когда в категории больше 4 товаров
+  // (кнопка "Show more" — см. Адаптив, catalog.js переключает [hidden]).
+  &__reload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    margin: 0 auto 40px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: none;
+    color: var(--color-text);
+    font-size: 18px;
+    cursor: pointer;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 506px;
+  border: 1px solid var(--color-border);
+  border-radius: 40px;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: transparent;
+  transition: transform 0.2s ease;
+
+  // .card{display:flex} выше перебивает дефолтный юа-стиль [hidden]{display:none},
+  // так как правило из автора всегда сильнее юа-стиля - объявляем display:none
+  // явно, иначе catalog.js не сможет скрывать карточки других категорий/капом.
+  &[hidden] {
+    display: none;
+  }
+
+  &:hover {
+    transform: scale(0.98);
+  }
+
+  &__image {
+    display: block;
+    width: 310px;
+    height: 310px;
+    border-radius: 40px;
+    object-fit: cover;
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 16px;
+  }
+
+  &__title {
+    @include heading-3;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  &__desc {
+    @include body-medium;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  &__price {
+    @include link-button-text;
+    color: var(--color-text);
+    margin-top: auto;
+  }
+}
+
+[data-theme='dark'] .card {
+  background-color: var(--bg-container);
+}
+
+[data-theme='dark'] .modal__panel {
+  background-color: var(--bg-container);
+}
+
+// ---------- Модалка товара ----------
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background-color: var(--bg-overlay);
+
+  &[hidden] {
+    display: none;
+  }
+
+  &__panel {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    width: 768px;
+    max-width: 100%;
+    height: 472px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    border-radius: 24px;
+    background-color: var(--color-bg);
+
+    @include tablet {
+      width: 656px;
+      height: 594px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__image {
+    flex: 0 0 310px;
+    width: 310px;
+    height: 310px;
+    border-radius: 40px;
+    object-fit: cover;
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  &__body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    @include heading-3;
+    margin-bottom: 8px;
+  }
+
+  &__desc {
+    @include body-medium;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  &__label {
+    @include link-button-text;
+    font-size: 14px;
+    color: var(--color-text-muted);
+    margin-bottom: 8px;
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  &__chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: none;
+    color: var(--color-text);
+    font-size: 14px;
+    cursor: pointer;
+
+    &--active {
+      background-color: var(--color-text);
+      color: var(--color-bg);
+      border-color: var(--color-text);
+    }
+  }
+
+  &__chip-letter,
+  &__chip-num {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background-color: var(--color-border);
+    color: var(--color-text);
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  &__chip--active &__chip-letter,
+  &__chip--active &__chip-num {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  &__total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 12px;
+    margin-bottom: 12px;
+    border-top: 1px solid var(--color-border);
+    @include heading-3;
+    font-size: 18px;
+  }
+
+  &__disclaimer {
+    display: flex;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 150%;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+  }
+
+  &__close-btn {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: none;
+    color: var(--color-text);
+    @include link-button-text;
+    cursor: pointer;
+  }
+
+  &__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: none;
+    color: var(--color-text-muted);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+}
+
+// ---------- Адаптив ----------
+@include tablet {
+  .catalog__grid {
+    grid-template-columns: repeat(2, 310px);
+    justify-content: center;
+  }
+
+  // На планшете/мобильном отдельной кнопки Menu в хедере нет — она внутри бургер-меню
+  .header__menu-btn {
+    display: none;
+  }
+
+  // Внутри бургер-меню кнопка "Menu" крупнее, чем в хедере (72x28) - здесь она
+  // равноправный пункт списка, а не мелкая иконка сбоку.
+  .nav__menu-link {
+    display: block;
+    width: 130px;
+    height: 50px;
+    margin-top: 40px;
+  }
+
+  // Полноэкранная панель бургер-меню: та же заливка, что у шапки (та "видна"
+  // сверху панели, потому что панель начинается с $header-height), ссылки
+  // не прижаты влево, а отцентрированы и по горизонтали, и по вертикали.
+  .nav {
+    position: fixed;
+    inset: $header-height 0 0 0;
+    z-index: 90;
+    background-color: var(--color-header-bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 24px;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+
+    &--open {
+      transform: translateX(0);
+    }
+
+    &__link {
+      @include burger-link-text;
+    }
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  // На планшете и мобильном пилюля переключателя темы крупнее (под тач-таргет)
+  .theme-toggle {
+    width: 104px;
+    height: 52px;
+    padding: 6px 8px;
+
+    &__circle {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
+@include mobile {
+  .catalog__grid {
+    grid-template-columns: 310px;
+    justify-content: center;
+  }
+
+  .header__actions {
+    gap: 8px;
+  }
+}

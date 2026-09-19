@@ -1,14 +1,14 @@
-# RS School — Landing Page
+# Coffee House — RS School Landing Page
 
-Публичный репозиторий для учебного задания **Landing Page** курса RS School (Fullstack Engineering).
+Учебный адаптивный лендинг кофейни на чистом HTML/SCSS/JS (Vite).
 
-Ветка `main` остаётся пустой согласно требованиям задания и содержит только служебные файлы.
+## Скрипты
+- `npm run dev` — локальный сервер разработки
+- `npm run build` — прод-сборка (`dist/`, с sourcemaps)
+- `npm run preview` — предпросмотр сборки
 
-## Ветки
-
-- [`landing-page`](../../tree/landing-page) — Часть 1: адаптивная вёрстка, переключение тем. PR → `main`.
-- `landing-page-part-2` — Часть 2: интерактивность (бургер-меню, слайдер, каталог, модальное окно). PR → `landing-page`.
-
-## Тема проекта
-
-Coffee House — сайт кофейни (по [макету в Figma](https://www.figma.com/design/yuc5s9NCc4jENkk5LdFfvX/Coffee-House-2026Q3?node-id=0-1)).
+## Структура
+- `index.html` — главная страница
+- `catalog.html` — каталог
+- `src/styles/` — SCSS (переменные, темы, основные стили)
+- `src/scripts/` — JS-модули (тема, навигация)

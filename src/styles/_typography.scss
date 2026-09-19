@@ -1,0 +1,69 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Шкала типографики по дизайн-системе макета (Desktop → Mobile)
+@mixin heading-1 {
+  font-family: $font-main;
+  font-weight: 600;
+  // Плавное уменьшение между планшетом (1023 → 72px) и мобилкой (480 → 42px):
+  // без clamp при фиксированных 72px в узком планшетном диапазоне заголовок
+  // переносится на кучу строк и карточка hero "растягивается вниз".
+  font-size: clamp(42px, 5.53vw + 15.5px, 72px);
+  line-height: 105%;
+
+  @include mobile {
+    line-height: 115%;
+  }
+}
+
+@mixin heading-2 {
+  font-family: $font-main;
+  font-weight: 600;
+  // Раньше был clamp() как у heading-1, но по факту в макете (favorites/about/app —
+  // подтверждено 3 раза одинаковыми цифрами) на планшете шрифт остаётся ровно 60px,
+  // а не плавно уменьшается — clamp давал ~47px на 768 и текст не совпадал с макетом
+  // по количеству строк/высоте блока. Уменьшается только на мобилке (см. ниже).
+  font-size: 60px;
+  line-height: 125%;
+
+  @include mobile {
+    font-size: 32px;
+  }
+}
+
+@mixin heading-3 {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 125%;
+}
+
+@mixin body-medium {
+  font-family: $font-main;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+@mixin caption {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 140%;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@mixin link-button-text {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 150%;
+}
+
+@mixin burger-link-text {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 125%;
+}
