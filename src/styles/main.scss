@@ -88,6 +88,69 @@ a {
   }
 }
 
+// ---------- Menu CTA (готовые SVG из макета: 72x28, default/active на каждую тему) ----------
+.menu-cta {
+  position: relative;
+  display: inline-block;
+  width: 72px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.menu-icon {
+  position: absolute;
+  inset: 0;
+  width: 72px;
+  height: 28px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.menu-icon--light {
+  opacity: 1;
+}
+
+.menu-cta:hover .menu-icon--light,
+.menu-cta:focus-visible .menu-icon--light {
+  opacity: 0;
+}
+
+.menu-cta:hover .menu-icon--light-active,
+.menu-cta:focus-visible .menu-icon--light-active {
+  opacity: 1;
+}
+
+[data-theme='dark'] {
+  .menu-icon--light,
+  .menu-icon--light-active {
+    opacity: 0;
+  }
+
+  .menu-icon--dark {
+    opacity: 1;
+  }
+
+  .menu-cta:hover .menu-icon--dark,
+  .menu-cta:focus-visible .menu-icon--dark {
+    opacity: 0;
+  }
+
+  .menu-cta:hover .menu-icon--dark-active,
+  .menu-cta:focus-visible .menu-icon--dark-active {
+    opacity: 1;
+  }
+}
+
+.header__menu-btn {
+  flex-shrink: 0;
+}
+
+// Внутри выезжающего меню (планшет/мобильный) — скрыт на десктопе
+.nav__menu-link {
+  display: none;
+  margin-top: 24px;
+}
+
 // ---------- Логотип (шапка и подвал) ----------
 // Готовые растровые лого из Figma: logo-1 — для светлой темы, logo-2 — для тёмной.
 .logo {
@@ -346,8 +409,13 @@ a {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .header__menu-btn span {
+  // На планшете/мобильном отдельной кнопки Menu в хедере нет — она внутри бургер-меню
+  .header__menu-btn {
     display: none;
+  }
+
+  .nav__menu-link {
+    display: block;
   }
 
   .nav {
