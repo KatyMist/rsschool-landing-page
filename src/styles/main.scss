@@ -726,6 +726,97 @@ a {
   }
 }
 
+// ---------- Mobile app ----------
+// Обе колонки резиновые (flex:1 1 0), без жёстких max-width — тот же подход, что и в About,
+// после истории с "пустотой справа" на широких мониторах: 630/630 в макете — это просто
+// пропорция при 1440, а не потолок.
+.app__inner {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+
+  @include tablet {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+}
+
+.app__content {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.app__title {
+  @include heading-2;
+  margin-bottom: 24px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+}
+
+.app__text {
+  @include body-medium;
+  color: var(--color-text);
+  margin-bottom: 40px;
+}
+
+.app__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+// Кнопки — готовые SVG 200x64 с текстом внутри (как favorites__arrow), размер фиксирован
+// на всех брейкпоинтах по макету, только меняются местами light/dark варианты.
+.app__store-btn {
+  display: block;
+  width: 200px;
+  height: 64px;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.app__store-icon {
+  display: none;
+  width: 100%;
+  height: 100%;
+}
+
+.app__store-icon--light {
+  display: block;
+}
+
+[data-theme='dark'] {
+  .app__store-icon--light {
+    display: none;
+  }
+
+  .app__store-icon--dark {
+    display: block;
+  }
+}
+
+.app__images {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.app__phones {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
 // ---------- Каталог ----------
 .catalog {
   &__categories {
