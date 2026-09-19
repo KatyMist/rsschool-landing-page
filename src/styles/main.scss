@@ -627,6 +627,103 @@ a {
   }
 }
 
+// ---------- About ----------
+// Лид-абзац визуально в масштабе heading-2 (60px → 32px на мобилке), хотя это <p>, а не заголовок —
+// та же логика плавного clamp-масштабирования, что уже используется в hero/favorites.
+.about__lead {
+  @include heading-2;
+  margin-bottom: 40px;
+
+  em {
+    font-style: italic;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  @include mobile {
+    margin-bottom: 24px;
+  }
+}
+
+// Десктоп/ноутбук: масонри-сетка 2×2 из 4 фото — левая колонка 590/430, правая 430/590
+// (gap 40 создаёт суммарную высоту 1060, как в макете).
+// Планшет: остаются только 2 "фичевых" фото (about-1 и about-4, по скринам макета),
+// про-2/про-3 скрываются, а оставшиеся становятся квадратами 1:1 рядом друг с другом.
+// Мобилка: те же 2 фото, но в один столбец и с пропорцией 348:590.
+.about__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+
+  @include tablet {
+    gap: 24px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+.about__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.about__img--1 {
+  grid-column: 1;
+  grid-row: 1;
+  aspect-ratio: 660 / 590;
+
+  @include tablet {
+    aspect-ratio: 1 / 1;
+  }
+
+  @include mobile {
+    aspect-ratio: 348 / 590;
+  }
+}
+
+.about__img--2 {
+  grid-column: 1;
+  grid-row: 2;
+  aspect-ratio: 660 / 430;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.about__img--3 {
+  grid-column: 2;
+  grid-row: 1;
+  aspect-ratio: 660 / 430;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.about__img--4 {
+  grid-column: 2;
+  grid-row: 2;
+  aspect-ratio: 660 / 590;
+
+  @include tablet {
+    grid-column: 2;
+    grid-row: 1;
+    aspect-ratio: 1 / 1;
+  }
+
+  @include mobile {
+    grid-column: 1;
+    grid-row: 2;
+    aspect-ratio: 348 / 590;
+  }
+}
+
 // ---------- Каталог ----------
 .catalog {
   &__categories {
