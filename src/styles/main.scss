@@ -817,6 +817,138 @@ a {
   object-fit: contain;
 }
 
+// ---------- Contacts ----------
+// Карточка использует тот же паттерн паддингов, что и .hero__card
+// (100 / 48 / 24 на десктоп/таблет/мобилку) - это уже устоявшийся
+// компонент-паттерн "карточка" в макете, а не совпадение.
+.contacts {
+  &__card {
+    display: flex;
+    align-items: center;
+    gap: 100px;
+    padding: 100px;
+    border-radius: 40px;
+    background-color: var(--bg-container);
+
+    @include tablet {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 48px;
+    }
+
+    @include mobile {
+      padding: 24px;
+      gap: 32px;
+    }
+  }
+
+  // Обе колонки одинаковой ширины 530px - 530 + 100(gap) + 530 = 1160,
+  // ровно контентная ширина карточки (1360 - 2*100 паддинга). На планшете/
+  // мобилке карточка становится колонкой, ширина колонок = 100%.
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 530px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__title {
+    @include heading-2;
+    color: var(--text-inverse);
+    max-width: 530px;
+
+    em {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--text-accent);
+    }
+
+    @include mobile {
+      max-width: 316px;
+    }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 12px;
+  }
+
+  &__social {
+    display: block;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  &__social-icon {
+    display: none;
+    width: 100%;
+    height: 100%;
+
+    &--light {
+      display: block;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 530px;
+
+    @include tablet {
+      width: 100%;
+    }
+  }
+
+  &__heading {
+    @include heading-3;
+    color: var(--text-inverse);
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include body-medium;
+    color: var(--text-inverse);
+  }
+
+  &__icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+  }
+}
+
+[data-theme='dark'] {
+  .contacts__social-icon--light {
+    display: none;
+  }
+
+  .contacts__social-icon--dark {
+    display: block;
+  }
+}
+
 // ---------- Каталог ----------
 .catalog {
   &__categories {
