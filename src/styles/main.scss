@@ -301,6 +301,7 @@ a {
 }
 
 .burger {
+  position: relative;
   display: none;
   align-items: center;
   justify-content: center;
@@ -313,22 +314,36 @@ a {
   color: var(--color-text);
   flex-shrink: 0;
 
+  // Обе иконки лежат друг на друге по центру кнопки и переключаются
+  // кросс-фейдом + поворотом, а не мгновенным display:none/block.
   svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
     width: 20px;
     height: 20px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .icon-menu {
+    opacity: 1;
+    transform: rotate(0deg);
   }
 
   .icon-close {
-    display: none;
+    opacity: 0;
+    transform: rotate(-90deg);
   }
 
   &[aria-expanded='true'] {
     .icon-menu {
-      display: none;
+      opacity: 0;
+      transform: rotate(90deg);
     }
 
     .icon-close {
-      display: block;
+      opacity: 1;
+      transform: rotate(0deg);
     }
   }
 }
