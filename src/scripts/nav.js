@@ -1,4 +1,4 @@
-const OFF_CANVAS_QUERY = '(max-width: 1023px)';
+const OFF_CANVAS_QUERY = '(max-width: 768px)';
 
 function getFocusable(container) {
   return Array.from(

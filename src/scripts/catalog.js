@@ -50,7 +50,7 @@ export function initCatalog() {
     tabs[0].dataset.categoryTab;
   let expanded = false;
 
-  const isCapped = () => window.matchMedia('(max-width: 1023px)').matches;
+  const isCapped = () => window.matchMedia('(max-width: 768px)').matches;
 
   function render() {
     const capApplies = isCapped();
