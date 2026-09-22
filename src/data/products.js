@@ -1,3 +1,37 @@
+// Схема повторяет официальный products.json задания (RS School, Coffee House):
+// у каждого размера и у каждой добавки своя доплата (add-price), из которых
+// в модалке складывается итоговая цена. Базовая цена (price) соответствует
+// размеру S без добавок.
+const COFFEE_SIZES = [
+  { code: 's', label: 'S', size: '200 ml', addPrice: 0 },
+  { code: 'm', label: 'M', size: '300 ml', addPrice: 0.5 },
+  { code: 'l', label: 'L', size: '400 ml', addPrice: 1.0 },
+];
+
+const DESSERT_SIZES = [
+  { code: 's', label: 'S', size: '50 g', addPrice: 0 },
+  { code: 'm', label: 'M', size: '100 g', addPrice: 0.5 },
+  { code: 'l', label: 'L', size: '200 g', addPrice: 1.0 },
+];
+
+const COFFEE_ADDITIVES = [
+  { name: 'Sugar', addPrice: 0.5 },
+  { name: 'Cinnamon', addPrice: 0.5 },
+  { name: 'Syrup', addPrice: 0.5 },
+];
+
+const TEA_ADDITIVES = [
+  { name: 'Sugar', addPrice: 0.5 },
+  { name: 'Lemon', addPrice: 0.5 },
+  { name: 'Syrup', addPrice: 0.5 },
+];
+
+const DESSERT_ADDITIVES = [
+  { name: 'Berries', addPrice: 0.5 },
+  { name: 'Nuts', addPrice: 0.5 },
+  { name: 'Jam', addPrice: 0.5 },
+];
+
 export const products = [
   {
     id: 'irish-coffee',
@@ -6,8 +40,8 @@ export const products = [
     desc: 'Fragrant black coffee with Jameson Irish whiskey and whipped milk',
     price: 7.0,
     image: '/src/assets/image/coffee-4.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'kahlua-coffee',
@@ -16,8 +50,8 @@ export const products = [
     desc: 'Classic coffee with milk and Kahlua liqueur under a cap of frothed milk',
     price: 7.0,
     image: '/src/assets/image/coffee-5.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'honey-raf',
@@ -26,8 +60,8 @@ export const products = [
     desc: 'Espresso with frothed milk, cream and aromatic honey',
     price: 5.5,
     image: '/src/assets/image/coffee-6.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'ice-cappuccino',
@@ -36,8 +70,8 @@ export const products = [
     desc: 'Cappuccino with soft thick foam in summer version with ice',
     price: 5.0,
     image: '/src/assets/image/coffee-7.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'espresso',
@@ -46,8 +80,8 @@ export const products = [
     desc: 'Classic black coffee',
     price: 4.5,
     image: '/src/assets/image/coffee-8.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'latte',
@@ -56,8 +90,8 @@ export const products = [
     desc: 'Espresso coffee with the addition of steamed milk and dense milk foam',
     price: 5.5,
     image: '/src/assets/image/coffee-9.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'latte-macchiato',
@@ -66,8 +100,8 @@ export const products = [
     desc: 'Espresso with frothed milk and chocolate',
     price: 5.5,
     image: '/src/assets/image/coffee-10.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'coffee-with-cognac',
@@ -76,8 +110,8 @@ export const products = [
     desc: 'Fragrant black coffee with cognac and whipped cream',
     price: 6.5,
     image: '/src/assets/image/coffee-11.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Cinnamon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: COFFEE_ADDITIVES,
   },
   {
     id: 'moroccan',
@@ -86,8 +120,8 @@ export const products = [
     desc: 'Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint',
     price: 4.5,
     image: '/src/assets/image/tea-1.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Lemon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: TEA_ADDITIVES,
   },
   {
     id: 'ginger',
@@ -96,8 +130,8 @@ export const products = [
     desc: 'Original black tea with fresh ginger, lemon and honey',
     price: 5.0,
     image: '/src/assets/image/tea-2.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Lemon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: TEA_ADDITIVES,
   },
   {
     id: 'cranberry',
@@ -106,8 +140,8 @@ export const products = [
     desc: 'Invigorating black tea with cranberry and honey',
     price: 5.0,
     image: '/src/assets/image/tea-3.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Lemon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: TEA_ADDITIVES,
   },
   {
     id: 'sea-buckthorn',
@@ -116,8 +150,8 @@ export const products = [
     desc: 'Toning sweet black tea with sea buckthorn, fresh thyme and cinnamon',
     price: 5.5,
     image: '/src/assets/image/tea-4.png',
-    sizes: ['S 200 ml', 'M 300 ml', 'L 400 ml'],
-    additives: ['Sugar', 'Lemon', 'Syrup'],
+    sizes: COFFEE_SIZES,
+    additives: TEA_ADDITIVES,
   },
   {
     id: 'marble-cheesecake',
@@ -126,8 +160,8 @@ export const products = [
     desc: 'Philadelphia cheese with lemon zest on a light sponge cake and red currant jam',
     price: 3.5,
     image: '/src/assets/image/dessert-1.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'red-velvet',
@@ -136,8 +170,8 @@ export const products = [
     desc: 'Layer cake with cream cheese frosting',
     price: 4.0,
     image: '/src/assets/image/dessert-2.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'cheesecakes',
@@ -146,8 +180,8 @@ export const products = [
     desc: 'Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar',
     price: 4.5,
     image: '/src/assets/image/dessert-3.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'creme-brulee',
@@ -156,8 +190,8 @@ export const products = [
     desc: 'Delicate creamy dessert in a caramel basket with wild berries',
     price: 4.0,
     image: '/src/assets/image/dessert-4.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'pancakes',
@@ -166,8 +200,8 @@ export const products = [
     desc: 'Tender pancakes with strawberry jam and fresh strawberries',
     price: 4.5,
     image: '/src/assets/image/dessert-5.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'honey-cake',
@@ -176,8 +210,8 @@ export const products = [
     desc: 'Classic honey cake with delicate custard',
     price: 4.5,
     image: '/src/assets/image/dessert-6.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'chocolate-cake',
@@ -186,8 +220,8 @@ export const products = [
     desc: 'Cake with hot chocolate filling and nuts with dried apricots',
     price: 5.5,
     image: '/src/assets/image/dessert-7.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
   {
     id: 'black-forest',
@@ -196,7 +230,7 @@ export const products = [
     desc: 'A combination of thin sponge cake with cherry jam and light chocolate mousse',
     price: 6.5,
     image: '/src/assets/image/dessert-8.png',
-    sizes: ['S 50 g', 'M 100 g', 'L 200 g'],
-    additives: ['Berries', 'Nuts', 'Jam'],
+    sizes: DESSERT_SIZES,
+    additives: DESSERT_ADDITIVES,
   },
 ];

@@ -117,33 +117,47 @@ export function initProductModal(cards) {
   const totalEl = modal.querySelector('[data-modal-total]');
 
   let lastTrigger = null;
+  let basePrice = 0;
 
   function renderSizes(sizes) {
     sizesEl.innerHTML = sizes
       .map((s, i) => {
-        const [letter, ...rest] = s.trim().split(' ');
         const active = i === 0 ? ' modal__chip--active' : '';
-        return `<button type="button" class="modal__chip modal__chip--size${active}"><span class="modal__chip-letter">${letter}</span>${rest.join(' ')}</button>`;
+        return `<button type="button" class="modal__chip modal__chip--size${active}" data-add-price="${s.addPrice}"><span class="modal__chip-letter">${s.label}</span>${s.size}</button>`;
       })
       .join('');
   }
 
   function renderAdditives(additives) {
     additivesEl.innerHTML = additives
-      .map((a, i) => `<button type="button" class="modal__chip modal__chip--additive"><span class="modal__chip-num">${i + 1}</span>${a.trim()}</button>`)
+      .map((a, i) => `<button type="button" class="modal__chip modal__chip--additive" data-add-price="${a.addPrice}"><span class="modal__chip-num">${i + 1}</span>${a.name}</button>`)
       .join('');
+  }
+
+  // Итог = базовая цена (размер S без добавок) + доплата за выбранный размер
+  // + сумма доплат за выбранные добавки. Источник истины — сами чипы в DOM
+  // (их data-add-price и класс --active), а не отдельный JS-стейт.
+  function updateTotal() {
+    const activeSize = sizesEl.querySelector('.modal__chip--active');
+    const sizeAddPrice = activeSize ? Number(activeSize.dataset.addPrice) : 0;
+    const additivesAddPrice = Array.from(additivesEl.querySelectorAll('.modal__chip--active')).reduce(
+      (sum, chip) => sum + Number(chip.dataset.addPrice),
+      0,
+    );
+    totalEl.textContent = formatPrice(basePrice + sizeAddPrice + additivesAddPrice);
   }
 
   function open(product, triggerEl) {
     lastTrigger = triggerEl || document.activeElement;
+    basePrice = product.price;
 
     imageEl.src = product.image;
     imageEl.alt = product.name;
     titleEl.textContent = product.name;
     descEl.textContent = product.desc;
-    totalEl.textContent = formatPrice(product.price);
     renderSizes(product.sizes);
     renderAdditives(product.additives);
+    updateTotal();
 
     modal.hidden = false;
     document.body.classList.add('no-scroll');
@@ -179,12 +193,14 @@ export function initProductModal(cards) {
     if (sizeChip) {
       modal.querySelectorAll('.modal__chip--size').forEach((c) => c.classList.remove('modal__chip--active'));
       sizeChip.classList.add('modal__chip--active');
+      updateTotal();
       return;
     }
 
     const additiveChip = event.target.closest('.modal__chip--additive');
     if (additiveChip) {
       additiveChip.classList.toggle('modal__chip--active');
+      updateTotal();
     }
   });
 
