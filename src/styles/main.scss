@@ -756,6 +756,17 @@ a {
   height: auto;
   object-fit: cover;
   border-radius: 20px;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__img {
+    transition: none;
+  }
 }
 
 .about__img--1,
