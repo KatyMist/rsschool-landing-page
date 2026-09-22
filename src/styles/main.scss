@@ -301,6 +301,7 @@ a {
 }
 
 .burger {
+  position: relative;
   display: none;
   align-items: center;
   justify-content: center;
@@ -313,22 +314,36 @@ a {
   color: var(--color-text);
   flex-shrink: 0;
 
+  // Обе иконки лежат друг на друге по центру кнопки и переключаются
+  // кросс-фейдом + поворотом, а не мгновенным display:none/block.
   svg {
+    position: absolute;
+    inset: 0;
+    margin: auto;
     width: 20px;
     height: 20px;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .icon-menu {
+    opacity: 1;
+    transform: rotate(0deg);
   }
 
   .icon-close {
-    display: none;
+    opacity: 0;
+    transform: rotate(-90deg);
   }
 
   &[aria-expanded='true'] {
     .icon-menu {
-      display: none;
+      opacity: 0;
+      transform: rotate(90deg);
     }
 
     .icon-close {
-      display: block;
+      opacity: 1;
+      transform: rotate(0deg);
     }
   }
 }
@@ -390,6 +405,19 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+// Лёгкий зум фото при наведении на карточку — .hero__card уже overflow:hidden,
+// так что увеличенное фото не вылезает за скруглённые края.
+.hero__card:hover .hero__image {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__image {
+    transition: none;
+  }
 }
 
 .hero__content {
@@ -581,6 +609,10 @@ a {
   overflow: hidden;
   width: 100%;
   max-width: 480px;
+  // Свайп слайдов обрабатывает наш JS (pointerdown/up) — pan-y оставляет
+  // браузеру только вертикальный скролл страницы, горизонтальный жест не
+  // будет "перетягивать" всю страницу, пока пользователь листает слайды.
+  touch-action: pan-y;
 }
 
 .favorites__track {
@@ -639,11 +671,19 @@ a {
 .favorites__dot {
   width: 40px;
   height: 4px;
+  padding: 0;
+  border: none;
   border-radius: 999px;
   background-color: var(--border-primary);
+  cursor: pointer;
 
   &--active {
     background-color: var(--color-text);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 4px;
   }
 }
 
@@ -716,6 +756,17 @@ a {
   height: auto;
   object-fit: cover;
   border-radius: 20px;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about__img {
+    transition: none;
+  }
 }
 
 .about__img--1,
@@ -1088,6 +1139,11 @@ a {
     transform: scale(0.98);
   }
 
+  &:focus-visible {
+    outline: 2px solid var(--text-accent);
+    outline-offset: 2px;
+  }
+
   &__image {
     display: block;
     width: 310px;
@@ -1158,6 +1214,15 @@ a {
     padding: 24px;
     border-radius: 24px;
     background-color: var(--color-bg);
+
+    &:focus-visible {
+      outline: 2px solid var(--text-accent);
+      outline-offset: -4px;
+    }
+
+    &:focus:not(:focus-visible) {
+      outline: none;
+    }
 
     @include tablet {
       width: 656px;
@@ -1303,12 +1368,12 @@ a {
 }
 
 // ---------- Адаптив ----------
-@include tablet {
-  .catalog__grid {
-    grid-template-columns: repeat(2, 310px);
-    justify-content: center;
-  }
-
+// Брейкпоинт бургер-меню/навигации — отдельный (768/769px), а не общий tablet
+// (1023px): так требует чек-лист Part 2 ("при ширине 769px и больше меню
+// закрывается, кнопка скрывается, а основная навигация отображается").
+// Остальная раскладка (сетка каталога, размер пилюли темы и т.д.) по-прежнему
+// переключается на 1023px — эти два брейкпоинта теперь независимы.
+@include burger-nav {
   // На планшете/мобильном отдельной кнопки Menu в хедере нет — она внутри бургер-меню
   .header__menu-btn {
     display: none;
@@ -1351,6 +1416,13 @@ a {
 
   .burger {
     display: flex;
+  }
+}
+
+@include tablet {
+  .catalog__grid {
+    grid-template-columns: repeat(2, 310px);
+    justify-content: center;
   }
 
   // На планшете и мобильном пилюля переключателя темы крупнее (под тач-таргет)

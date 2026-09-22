@@ -6,6 +6,12 @@
   }
 }
 
+@mixin burger-nav {
+  @media (max-width: $bp-burger) {
+    @content;
+  }
+}
+
 @mixin mobile {
   @media (max-width: $bp-mobile) {
     @content;

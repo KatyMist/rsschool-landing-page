@@ -137,10 +137,12 @@
             </button>
           </div>
 
-          <div class="favorites__dots" aria-hidden="true">
-            <span class="favorites__dot favorites__dot--active"></span>
-            <span class="favorites__dot"></span>
-            <span class="favorites__dot"></span>
+          <p class="visually-hidden" data-favorites-status aria-live="polite"></p>
+
+          <div class="favorites__dots">
+            <button type="button" class="favorites__dot favorites__dot--active" aria-label="Go to slide 1" aria-current="true"></button>
+            <button type="button" class="favorites__dot" aria-label="Go to slide 2" aria-current="false"></button>
+            <button type="button" class="favorites__dot" aria-label="Go to slide 3" aria-current="false"></button>
           </div>
         </div>
       </section>
