@@ -405,6 +405,19 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+// Лёгкий зум фото при наведении на карточку — .hero__card уже overflow:hidden,
+// так что увеличенное фото не вылезает за скруглённые края.
+.hero__card:hover .hero__image {
+  transform: scale(1.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__image {
+    transition: none;
+  }
 }
 
 .hero__content {
