@@ -1,7 +1,10 @@
+const SWIPE_THRESHOLD = 40; // px — минимальное горизонтальное смещение, чтобы засчитать свайп
+
 export function initFavoritesSlider() {
   const slider = document.querySelector('.favorites__slider');
   if (!slider) return;
 
+  const viewport = slider.querySelector('.favorites__viewport');
   const track = slider.querySelector('.favorites__track');
   const slides = Array.from(slider.querySelectorAll('.favorites__slide'));
   const prevBtn = slider.querySelector('.favorites__arrow--prev');
@@ -45,6 +48,37 @@ export function initFavoritesSlider() {
       announce = true;
       render();
     });
+  });
+
+  // Свайп на мобильном (стрелки там скрыты — .favorites__arrow{@include mobile{display:none}}).
+  // Pointer Events покрывают и touch, и mouse-драг одним кодом; вертикальный
+  // скролл страницы не трогаем — оцениваем только жест целиком по pointerup,
+  // без preventDefault на месте.
+  let pointerId = null;
+  let startX = 0;
+  let startY = 0;
+
+  viewport?.addEventListener('pointerdown', (event) => {
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    pointerId = event.pointerId;
+    startX = event.clientX;
+    startY = event.clientY;
+  });
+
+  viewport?.addEventListener('pointerup', (event) => {
+    if (pointerId === null || event.pointerId !== pointerId) return;
+    pointerId = null;
+
+    const deltaX = event.clientX - startX;
+    const deltaY = event.clientY - startY;
+
+    if (Math.abs(deltaX) > SWIPE_THRESHOLD && Math.abs(deltaX) > Math.abs(deltaY)) {
+      goTo(deltaX < 0 ? 1 : -1);
+    }
+  });
+
+  viewport?.addEventListener('pointercancel', () => {
+    pointerId = null;
   });
 
   render();
