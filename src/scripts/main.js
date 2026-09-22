@@ -7,7 +7,7 @@ import { initFavoritesSlider } from './favorites.js';
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initBurgerMenu();
-  initCatalog();
-  initProductModal();
+  const cards = initCatalog();
+  initProductModal(cards);
   initFavoritesSlider();
 });

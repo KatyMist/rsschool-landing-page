@@ -1,11 +1,46 @@
+import { products } from '../data/products.js';
+
 const CAP = 4;
+
+function formatPrice(price) {
+  return `$${price.toFixed(2)}`;
+}
+
+function createCardElement(product) {
+  const card = document.createElement('article');
+  card.className = 'card';
+  card.dataset.category = product.category;
+  card.dataset.id = product.id;
+
+  const image = document.createElement('img');
+  image.className = 'card__image';
+  image.src = product.image;
+  image.alt = product.name;
+  image.loading = 'lazy';
+
+  const body = document.createElement('div');
+  body.className = 'card__body';
+  body.innerHTML = `
+    <h3 class="card__title">${product.name}</h3>
+    <p class="card__desc">${product.desc}</p>
+    <p class="card__price">${formatPrice(product.price)}</p>
+  `;
+
+  card.append(image, body);
+  return card;
+}
 
 export function initCatalog() {
   const grid = document.querySelector('[data-catalog-grid]');
   const tabs = document.querySelectorAll('[data-category-tab]');
-  const cards = document.querySelectorAll('[data-card]');
   const reloadBtn = document.querySelector('[data-catalog-reload]');
-  if (!grid || !tabs.length || !cards.length) return;
+  if (!grid || !tabs.length) return null;
+
+  const cards = products.map((product) => {
+    const card = createCardElement(product);
+    grid.appendChild(card);
+    return { product, card };
+  });
 
   let activeCategory =
     document.querySelector('[data-category-tab].catalog__category--active')?.dataset.categoryTab ||
@@ -18,8 +53,8 @@ export function initCatalog() {
     const capApplies = isCapped();
     let visibleIndex = 0;
 
-    cards.forEach((card) => {
-      const matches = card.dataset.card === activeCategory;
+    cards.forEach(({ product, card }) => {
+      const matches = product.category === activeCategory;
       if (!matches) {
         card.hidden = true;
         return;
@@ -28,7 +63,7 @@ export function initCatalog() {
       card.hidden = capApplies && !expanded && visibleIndex > CAP;
     });
 
-    const totalInCategory = Array.from(cards).filter((c) => c.dataset.card === activeCategory).length;
+    const totalInCategory = cards.filter(({ product }) => product.category === activeCategory).length;
     const needsReload = capApplies && !expanded && totalInCategory > CAP;
     if (reloadBtn) reloadBtn.hidden = !needsReload;
   }
@@ -54,11 +89,13 @@ export function initCatalog() {
   window.addEventListener('resize', render);
 
   render();
+
+  return cards;
 }
 
-export function initProductModal() {
+export function initProductModal(cards) {
   const modal = document.querySelector('[data-modal]');
-  if (!modal) return;
+  if (!modal || !cards) return;
 
   const imageEl = modal.querySelector('[data-modal-image]');
   const titleEl = modal.querySelector('[data-modal-title]');
@@ -69,7 +106,6 @@ export function initProductModal() {
 
   function renderSizes(sizes) {
     sizesEl.innerHTML = sizes
-      .split('|')
       .map((s, i) => {
         const [letter, ...rest] = s.trim().split(' ');
         const active = i === 0 ? ' modal__chip--active' : '';
@@ -80,19 +116,18 @@ export function initProductModal() {
 
   function renderAdditives(additives) {
     additivesEl.innerHTML = additives
-      .split(',')
       .map((a, i) => `<button type="button" class="modal__chip modal__chip--additive"><span class="modal__chip-num">${i + 1}</span>${a.trim()}</button>`)
       .join('');
   }
 
-  function open(card) {
-    imageEl.src = card.dataset.image;
-    imageEl.alt = card.dataset.name;
-    titleEl.textContent = card.dataset.name;
-    descEl.textContent = card.dataset.desc;
-    totalEl.textContent = card.dataset.price;
-    renderSizes(card.dataset.sizes);
-    renderAdditives(card.dataset.additives);
+  function open(product) {
+    imageEl.src = product.image;
+    imageEl.alt = product.name;
+    titleEl.textContent = product.name;
+    descEl.textContent = product.desc;
+    totalEl.textContent = formatPrice(product.price);
+    renderSizes(product.sizes);
+    renderAdditives(product.additives);
 
     modal.hidden = false;
     document.body.classList.add('no-scroll');
@@ -103,8 +138,8 @@ export function initProductModal() {
     document.body.classList.remove('no-scroll');
   }
 
-  document.querySelectorAll('[data-card]').forEach((card) => {
-    card.addEventListener('click', () => open(card));
+  cards.forEach(({ product, card }) => {
+    card.addEventListener('click', () => open(product));
   });
 
   modal.addEventListener('click', (event) => {
