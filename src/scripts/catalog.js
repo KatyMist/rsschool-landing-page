@@ -11,6 +11,9 @@ function createCardElement(product) {
   card.className = 'card';
   card.dataset.category = product.category;
   card.dataset.id = product.id;
+  card.tabIndex = 0;
+  card.setAttribute('role', 'button');
+  card.setAttribute('aria-label', `${product.name} — ${formatPrice(product.price)}`);
 
   const image = document.createElement('img');
   image.className = 'card__image';
@@ -93,16 +96,27 @@ export function initCatalog() {
   return cards;
 }
 
+function getFocusable(container) {
+  return Array.from(
+    container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+    ),
+  ).filter((el) => !el.hidden && el.offsetParent !== null);
+}
+
 export function initProductModal(cards) {
   const modal = document.querySelector('[data-modal]');
   if (!modal || !cards) return;
 
+  const panel = modal.querySelector('.modal__panel');
   const imageEl = modal.querySelector('[data-modal-image]');
   const titleEl = modal.querySelector('[data-modal-title]');
   const descEl = modal.querySelector('[data-modal-desc]');
   const sizesEl = modal.querySelector('[data-modal-sizes]');
   const additivesEl = modal.querySelector('[data-modal-additives]');
   const totalEl = modal.querySelector('[data-modal-total]');
+
+  let lastTrigger = null;
 
   function renderSizes(sizes) {
     sizesEl.innerHTML = sizes
@@ -120,7 +134,9 @@ export function initProductModal(cards) {
       .join('');
   }
 
-  function open(product) {
+  function open(product, triggerEl) {
+    lastTrigger = triggerEl || document.activeElement;
+
     imageEl.src = product.image;
     imageEl.alt = product.name;
     titleEl.textContent = product.name;
@@ -131,15 +147,26 @@ export function initProductModal(cards) {
 
     modal.hidden = false;
     document.body.classList.add('no-scroll');
+    panel.focus();
   }
 
   function close() {
     modal.hidden = true;
     document.body.classList.remove('no-scroll');
+    if (lastTrigger && typeof lastTrigger.focus === 'function') {
+      lastTrigger.focus();
+    }
+    lastTrigger = null;
   }
 
   cards.forEach(({ product, card }) => {
-    card.addEventListener('click', () => open(product));
+    card.addEventListener('click', () => open(product, card));
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        open(product, card);
+      }
+    });
   });
 
   modal.addEventListener('click', (event) => {
@@ -161,7 +188,28 @@ export function initProductModal(cards) {
     }
   });
 
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && !modal.hidden) close();
+  modal.addEventListener('keydown', (event) => {
+    if (modal.hidden) return;
+
+    if (event.key === 'Escape') {
+      close();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const focusable = getFocusable(panel);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
   });
 }
